@@ -1,0 +1,41 @@
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Eclipse project files
+.classpath
+.project
+.metadata
+State/.idea/
+.idea/
+/State/State.iml
+/StateTests/StateTests.iml
+State/out/
+State/build/
+SlidingUpPanel/build/
+.gradle/
+*.iml
+build/
+crashlytics-build.properties
+
+# Mac
+.DS_Store
+
+# Other
+com_crashlytics_export_strings.xml
+desktop.ini
+Thumbs.db
+
