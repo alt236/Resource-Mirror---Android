@@ -12,8 +12,8 @@ import uk.co.alt236.resourcemirror.util.ReflectionUtils;
 
 public abstract class AbstractResourceReflector implements ResourceReflector {
 	protected static final String THE_DEFAULT_CONSTRUCTOR_WAS_CALLED = "The default Constructor was called! This should never happen...";
-	protected static final boolean TIME_LOGGING_ENABLED = false;
-	protected static final int CACHE_SIZE = 100;
+	private static final boolean TIME_LOGGING_ENABLED = false;
+	private static final int CACHE_SIZE = 100;
 
 	private final AtomicBoolean mLogErrors;
 	private final ReflectionUtils mReflectionUtils;
@@ -21,7 +21,7 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
 	private final Map<String, Object> mCacheMisses;
     protected final ResourceKeyFormatter mKeyFormatter;
 
-	protected AbstractResourceReflector(String packageName) {
+	protected AbstractResourceReflector(final String packageName) {
 		if (packageName == null) {
 			mReflectionUtils = null;
 		} else {
@@ -33,11 +33,11 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
 		mLogErrors = new AtomicBoolean(false);
 	}
 
-	private void addToCache(String key, Integer value) {
+	private void addToCache(final String key, final Integer value) {
 		mCache.put(key, value);
 	}
 
-	private void addToMissCache(String key, Integer value) {
+	private void addToMissCache(final String key, final Integer value) {
 		mCacheMisses.put(key, value);
 	}
 
@@ -83,7 +83,7 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
 		return mReflectionUtils.getResourceTypes();
 	}
 
-	protected Integer getFromCache(String key) {
+	protected Integer getFromCache(final String key) {
 		return mCache.get(key);
 	}
 
@@ -94,7 +94,7 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
 	}
 
 	@Override
-	public int getResourceId(String resourceName) {
+	public int getResourceId(final String resourceName) {
 		return getResourceId(resourceName, null);
 	}
 
@@ -147,7 +147,7 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
 	 * @param enable
 	 *            - True to enable, false to disable. False by default;
 	 */
-	public void setLogErrors(boolean enable) {
+	public void setLogErrors(final boolean enable) {
 		mLogErrors.set(enable);
 	}
 }

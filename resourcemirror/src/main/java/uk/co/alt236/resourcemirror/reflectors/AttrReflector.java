@@ -33,7 +33,7 @@ public final class AttrReflector extends AbstractResourceReflector {
 
 	}
 
-	protected AttrReflector(String packageName) {
+	protected AttrReflector(final String packageName) {
 		super(packageName);
 	}
 

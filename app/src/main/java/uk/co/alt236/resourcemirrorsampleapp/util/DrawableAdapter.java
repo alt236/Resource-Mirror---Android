@@ -43,7 +43,7 @@ public class DrawableAdapter extends ArrayAdapter<String>{
     private final LayoutInflater mLayoutInflater;
     private final ResourceKeyFormatter mKeyFormatter;
 
-	public DrawableAdapter(Context context, Mirror mirror, List<String> itemList) {
+	public DrawableAdapter(final Context context, final Mirror mirror, final List<String> itemList) {
 		super(context, mLayout);
         mKeyFormatter = new ResourceKeyFormatter();
 		mItemList = itemList;
@@ -53,7 +53,7 @@ public class DrawableAdapter extends ArrayAdapter<String>{
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, final View convertView, final ViewGroup parent) {
 
 		final View row;
 		final Wrapper wrapper;
@@ -73,7 +73,7 @@ public class DrawableAdapter extends ArrayAdapter<String>{
 	}
 
 	@Override
-	public String getItem(int position) {
+	public String getItem(final int position) {
 		return mItemList.get(position);
 	}
 
@@ -89,7 +89,7 @@ public class DrawableAdapter extends ArrayAdapter<String>{
 
 		private View row = null;
 
-		public Wrapper(View row) {
+		public Wrapper(final View row) {
 			this.row = row;
 		}
 

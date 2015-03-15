@@ -36,7 +36,7 @@ public class GenericAdapter extends ArrayAdapter<String>{
 	private final ResourceType mResourceType;
     private final LayoutInflater mLayoutInflater;
 
-	public GenericAdapter(Context context, Mirror mirror, ResourceType resourceType, List<String> itemList) {
+	public GenericAdapter(final Context context, final Mirror mirror, final ResourceType resourceType, final List<String> itemList) {
 		super(context, mLayout);
 		mItemList = itemList;
         mMirror = mirror;
@@ -45,7 +45,7 @@ public class GenericAdapter extends ArrayAdapter<String>{
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, final View convertView, final ViewGroup parent) {
 
 		final View row;
 		final Wrapper wrapper;
@@ -65,7 +65,7 @@ public class GenericAdapter extends ArrayAdapter<String>{
 	}
 
 	@Override
-	public String getItem(int position) {
+	public String getItem(final int position) {
 		return mItemList.get(position);
 	}
 
@@ -81,7 +81,7 @@ public class GenericAdapter extends ArrayAdapter<String>{
 
 		private View row = null;
 
-		public Wrapper(View row) {
+		public Wrapper(final View row) {
 			this.row = row;
 		}
 

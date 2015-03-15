@@ -34,7 +34,7 @@ public final class ArrayReflector extends AbstractResourceReflector {
 
 	}
 
-	protected ArrayReflector(String packageName) {
+	protected ArrayReflector(final String packageName) {
 		super(packageName);
 	}
 

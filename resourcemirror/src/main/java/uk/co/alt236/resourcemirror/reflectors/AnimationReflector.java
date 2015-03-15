@@ -33,7 +33,7 @@ public final class AnimationReflector extends AbstractResourceReflector {
 
 	}
 
-	protected AnimationReflector(String packageName) {
+	protected AnimationReflector(final String packageName) {
 		super(packageName);
 	}
 

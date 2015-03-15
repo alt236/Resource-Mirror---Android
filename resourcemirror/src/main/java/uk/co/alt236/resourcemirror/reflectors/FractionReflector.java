@@ -33,7 +33,7 @@ public final class FractionReflector extends AbstractResourceReflector {
 
 	}
 
-	protected FractionReflector(String packageName) {
+	protected FractionReflector(final String packageName) {
 		super(packageName);
 	}
 

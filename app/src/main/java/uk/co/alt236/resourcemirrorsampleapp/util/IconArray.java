@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class IconArray {
-	public static String[] ICON_ARRAY = {
+	public static final String[] ICON_ARRAY = {
 		"social_share",
 		"social_send_now",
 		"social_reply_all",
@@ -164,13 +164,13 @@ public class IconArray {
 		"action_about"
 	};
 
-	public static String[] FAMILY_ARRAY = {
+	public static final String[] FAMILY_ARRAY = {
 		"light",
 		"dark",
 	};
 
-	public static ArrayList<String> getSimpleDrawableList(int resultSize){
-		ArrayList<String> tmpList = new ArrayList<String>();
+	public static ArrayList<String> getSimpleDrawableList(final int resultSize){
+		final ArrayList<String> tmpList = new ArrayList<String>();
 
 		final Random r = new Random();
 

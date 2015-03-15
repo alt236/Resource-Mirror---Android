@@ -33,7 +33,7 @@ public final class MenuReflector extends AbstractResourceReflector {
 
 	}
 
-	protected MenuReflector(String packageName) {
+	protected MenuReflector(final String packageName) {
 		super(packageName);
 	}
 

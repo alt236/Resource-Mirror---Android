@@ -33,7 +33,7 @@ public final class RawReflector extends AbstractResourceReflector {
 
 	}
 
-	protected RawReflector(String packageName) {
+	protected RawReflector(final String packageName) {
 		super(packageName);
 	}
 

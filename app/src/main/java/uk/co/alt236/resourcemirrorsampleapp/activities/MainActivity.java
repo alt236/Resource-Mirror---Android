@@ -39,7 +39,7 @@ public class MainActivity extends BaseListActivity{
 	ListAdapter mAdapter;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState){
+	public void onCreate(final Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
@@ -57,7 +57,7 @@ public class MainActivity extends BaseListActivity{
 	}
 
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	protected void onListItemClick(final ListView l, final View v, final int position, final long id) {
 		final String resourceName = ((TextView) v.findViewById(android.R.id.text1)).getText().toString();
 
 

@@ -26,14 +26,14 @@ public class LruLinkedHashMap<K,V> extends LinkedHashMap<K,V>{
 	 */
 	private static final long serialVersionUID = -1575270872785732340L;
 
-	public LruLinkedHashMap(int maxEntries, float loadFactor){
+	public LruLinkedHashMap(final int maxEntries, final float loadFactor){
 		super(maxEntries + 1, loadFactor, true);
 		this.mMaxEntries = maxEntries + 1;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public boolean removeEldestEntry(Map.Entry eldest) {
+	public boolean removeEldestEntry(final Map.Entry eldest) {
 		return size() > mMaxEntries;
 	}
 }

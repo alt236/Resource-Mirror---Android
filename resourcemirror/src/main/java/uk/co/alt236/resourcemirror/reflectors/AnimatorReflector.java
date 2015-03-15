@@ -34,7 +34,7 @@ public final class AnimatorReflector extends AbstractResourceReflector {
 
 	}
 
-	protected AnimatorReflector(String packageName) {
+	protected AnimatorReflector(final String packageName) {
 		super(packageName);
 	}
 

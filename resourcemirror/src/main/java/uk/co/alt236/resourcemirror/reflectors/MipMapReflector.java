@@ -33,7 +33,7 @@ public final class MipMapReflector extends AbstractResourceReflector {
 
 	}
 
-	protected MipMapReflector(String packageName) {
+	protected MipMapReflector(final String packageName) {
 		super(packageName);
 	}
 

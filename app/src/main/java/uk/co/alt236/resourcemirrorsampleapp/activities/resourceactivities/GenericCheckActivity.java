@@ -12,7 +12,7 @@ public class GenericCheckActivity extends BaseListActivity{
 
 
 	@Override
-	public void onCreate(Bundle savedInstanceState){
+	public void onCreate(final Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_generic_list);
 

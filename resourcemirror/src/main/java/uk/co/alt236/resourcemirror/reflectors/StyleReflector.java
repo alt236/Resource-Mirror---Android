@@ -33,7 +33,7 @@ public final class StyleReflector extends AbstractResourceReflector {
 
 	}
 
-	protected StyleReflector(String packageName) {
+	protected StyleReflector(final String packageName) {
 		super(packageName);
 	}
 

@@ -33,7 +33,7 @@ public final class DimenReflector extends AbstractResourceReflector {
 
 	}
 
-	protected DimenReflector(String packageName) {
+	protected DimenReflector(final String packageName) {
 		super(packageName);
 	}
 

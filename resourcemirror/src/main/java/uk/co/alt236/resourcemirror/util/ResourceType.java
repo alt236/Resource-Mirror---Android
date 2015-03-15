@@ -24,7 +24,7 @@ public enum ResourceType {
 	XML("xml");
 
 	private final String mResourceName;
-	private ResourceType(String name){
+	private ResourceType(final String name){
 		mResourceName = name;
 	}
 
@@ -32,8 +32,8 @@ public enum ResourceType {
 		return mResourceName;
 	}
 
-	public static ResourceType fromString(String string){
-		for(ResourceType type : ResourceType.values()){
+	public static ResourceType fromString(final String string){
+		for(final ResourceType type : ResourceType.values()){
 			if(type.getResourceName().equals(string)){
 				return type;
 			}

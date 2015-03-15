@@ -33,7 +33,7 @@ public final class InterpolatorReflector extends AbstractResourceReflector {
 
 	}
 
-	protected InterpolatorReflector(String packageName) {
+	protected InterpolatorReflector(final String packageName) {
 		super(packageName);
 	}
 

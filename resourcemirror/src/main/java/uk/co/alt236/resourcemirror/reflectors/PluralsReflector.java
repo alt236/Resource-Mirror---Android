@@ -33,7 +33,7 @@ public final class PluralsReflector extends AbstractResourceReflector {
 
 	}
 
-	protected PluralsReflector(String packageName) {
+	protected PluralsReflector(final String packageName) {
 		super(packageName);
 	}
 

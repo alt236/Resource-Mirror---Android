@@ -32,7 +32,7 @@ public final class IdReflector extends AbstractResourceReflector {
 		throw new IllegalStateException(THE_DEFAULT_CONSTRUCTOR_WAS_CALLED);
 	}
 
-	protected IdReflector(String packageName) {
+	protected IdReflector(final String packageName) {
 		super(packageName);
 	}
 

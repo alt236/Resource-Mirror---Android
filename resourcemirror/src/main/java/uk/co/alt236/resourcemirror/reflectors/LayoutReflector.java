@@ -32,7 +32,7 @@ public final class LayoutReflector extends AbstractResourceReflector {
 		throw new IllegalStateException(THE_DEFAULT_CONSTRUCTOR_WAS_CALLED);
 	}
 
-	protected LayoutReflector(String packageName) {
+	protected LayoutReflector(final String packageName) {
 		super(packageName);
 	}
 

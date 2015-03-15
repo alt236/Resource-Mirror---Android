@@ -35,7 +35,7 @@ public class Mirror {
 	private final Map<ResourceType, AbstractResourceReflector> mResourceLoaders;
 	private final String mPackageName;
 
-	private Mirror(String packageName) {
+	private Mirror(final String packageName) {
 		mPackageName = packageName;
 		mResourceLoaders = new HashMap<ResourceType, AbstractResourceReflector>();
 	}
@@ -454,11 +454,11 @@ public class Mirror {
 	 *            A standard Android context. It cannot be null
 	 * @return The instance of the ReflectiveDrawableLoader
 	 */
-	public static Mirror with(Context context) {
+	public static Mirror with(final Context context) {
 		return on(context.getApplicationContext().getPackageName());
 	}
 
-	public static Mirror on(String packageName) {
+	public static Mirror on(final String packageName) {
 		synchronized (MAP_LOCK) {
 			if(!MAP_OF_LOADERS.containsKey(packageName)){
 				MAP_OF_LOADERS.put(packageName, new Mirror(packageName));

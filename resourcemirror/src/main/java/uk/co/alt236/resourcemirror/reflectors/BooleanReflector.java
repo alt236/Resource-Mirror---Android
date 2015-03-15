@@ -33,7 +33,7 @@ public final class BooleanReflector extends AbstractResourceReflector {
 
 	}
 
-	protected BooleanReflector(String packageName) {
+	protected BooleanReflector(final String packageName) {
 		super(packageName);
 	}
 

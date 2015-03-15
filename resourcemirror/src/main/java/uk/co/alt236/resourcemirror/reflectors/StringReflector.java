@@ -33,7 +33,7 @@ public final class StringReflector extends AbstractResourceReflector {
 
 	}
 
-	protected StringReflector(String packageName) {
+	protected StringReflector(final String packageName) {
 		super(packageName);
 	}
 

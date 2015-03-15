@@ -33,7 +33,7 @@ public final class XmlReflector extends AbstractResourceReflector {
 
 	}
 
-	protected XmlReflector(String packageName) {
+	protected XmlReflector(final String packageName) {
 		super(packageName);
 	}
 

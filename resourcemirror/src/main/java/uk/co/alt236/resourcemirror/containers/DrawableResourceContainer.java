@@ -26,11 +26,11 @@ public class DrawableResourceContainer {
 	private final String mDrawableName;
 	private ColorFilter mColourFilter;
 
-	public DrawableResourceContainer(int resourceId, Integer colourFilterColour) {
+	public DrawableResourceContainer(final int resourceId, final Integer colourFilterColour) {
 		this(null, resourceId, colourFilterColour);
 	}
 
-	public DrawableResourceContainer(String drawableName, int resourceId, Integer colourFilterColour) {
+	public DrawableResourceContainer(final String drawableName, final int resourceId, final Integer colourFilterColour) {
 		this.mResourceId = resourceId;
 		this.mColourFilterColour = colourFilterColour;
 		this.mDrawableName = drawableName;
@@ -44,7 +44,7 @@ public class DrawableResourceContainer {
 		return mDrawableName;
 	}
 
-	private ColorFilter getOverridingColorFilter(int color){
+	private ColorFilter getOverridingColorFilter(final int color){
 		if(mColourFilter == null){
 			final int red = (color & 0xFF0000) / 0xFFFF;
 			final int green = (color & 0xFF00) / 0xFF;
@@ -68,7 +68,7 @@ public class DrawableResourceContainer {
 		return !(mColourFilterColour == null);
 	}
 
-	public void setDrawableWithColorOverrideMatrix(ImageView iv) {
+	public void setDrawableWithColorOverrideMatrix(final ImageView iv) {
 		iv.setImageResource(mResourceId);
 		if (hasColourFilter()) {
 			iv.setColorFilter(getOverridingColorFilter(mColourFilterColour));
@@ -77,7 +77,7 @@ public class DrawableResourceContainer {
 		}
 	}
 
-	public void setDrawableWithPorterDuffMultiply(ImageView iv) {
+	public void setDrawableWithPorterDuffMultiply(final ImageView iv) {
 		iv.setImageResource(mResourceId);
 		if (hasColourFilter()) {
 			iv.setColorFilter(mColourFilterColour, Mode.MULTIPLY);

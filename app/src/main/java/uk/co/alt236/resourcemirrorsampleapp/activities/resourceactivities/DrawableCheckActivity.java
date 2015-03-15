@@ -13,14 +13,14 @@ public class DrawableCheckActivity extends BaseListActivity{
 	private static final int RESULT_SET_SIZE = 500;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState){
+	public void onCreate(final Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_drawables);
 		getListView().setBackgroundColor(Color.parseColor("#c0c0c0"));
 		onRandomiseClick(null);
 	}
 
-	public void onRandomiseClick(View v){
+	public void onRandomiseClick(final View v){
         final ListAdapter adapter = new DrawableAdapter(this, geMirror(), IconArray.getSimpleDrawableList(RESULT_SET_SIZE));
 		getListView().setAdapter(adapter);
 	}

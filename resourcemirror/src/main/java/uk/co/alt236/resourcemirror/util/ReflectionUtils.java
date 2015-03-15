@@ -51,7 +51,7 @@ public class ReflectionUtils {
 					}
 				}
 
-			} catch (ClassNotFoundException e) {
+			} catch (final ClassNotFoundException e) {
 				Log.e(TAG, "getResourceClass() ClassNotFoundException: " + e.getMessage(), e);
 			}
 
@@ -72,7 +72,7 @@ public class ReflectionUtils {
 			for (final Field field : resourceArray) {
 				try {
 					list.add(field.getName());
-				} catch (IllegalArgumentException e) {
+				} catch (final IllegalArgumentException e) {
 					Log.e(TAG, "getResourceList() Error: " + e.getMessage(), e);
 				}
 			}
@@ -93,7 +93,7 @@ public class ReflectionUtils {
 				list.add(subClass.getSimpleName());
 			}
 
-		} catch (ClassNotFoundException e) {
+		} catch (final ClassNotFoundException e) {
 			Log.e(TAG, "getResourceClass() ClassNotFoundException: " + e.getMessage(), e);
 		}
 
@@ -112,7 +112,7 @@ public class ReflectionUtils {
 				Log.d(TAG, "logFields() Field: '" + field.getName() + "'");
 
 			}
-		} catch (NullPointerException e) {
+		} catch (final NullPointerException e) {
 		}
 	}
 
@@ -127,7 +127,7 @@ public class ReflectionUtils {
 				Log.d(TAG, "logSubClasses() Class: " + subclass.getCanonicalName());
 			}
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			Log.e(TAG, "logSubClasses() Error: " + e.getMessage(), e);
 		}
 	}
@@ -135,7 +135,7 @@ public class ReflectionUtils {
 	public int reflectResource(final ResourceType type, final String fieldName, final int defaultValue, final boolean reportFailure) {
 		final String resourceLocation = getResourceLocation(type);
 
-		int error;
+		final int error;
 		try {
 			final Field field = getResourceClass(resourceLocation).getField(fieldName);
 			if(field.getType().equals(int.class)){
@@ -147,11 +147,11 @@ public class ReflectionUtils {
 				return defaultValue;
 			}
 
-		} catch (NoSuchFieldException e) {
+		} catch (final NoSuchFieldException e) {
 			error = 1;
-		} catch (IllegalAccessException e) {
+		} catch (final IllegalAccessException e) {
 			error = 2;
-		} catch (NullPointerException e) {
+		} catch (final NullPointerException e) {
 			error = 3;
 		}
 
