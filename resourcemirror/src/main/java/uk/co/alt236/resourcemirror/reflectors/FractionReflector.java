@@ -22,28 +22,28 @@ import uk.co.alt236.resourcemirror.reflectors.base.AbstractResourceReflector;
 import uk.co.alt236.resourcemirror.util.ResourceType;
 
 public final class FractionReflector extends AbstractResourceReflector {
-	private final String TAG = getClass().getName();
-	private static final ResourceType RESOURCE_TYPE = ResourceType.FRACTION;
+    private final String TAG = getClass().getName();
+    private static final ResourceType RESOURCE_TYPE = ResourceType.FRACTION;
 
-	private FractionReflector() {
-		// We should never be here...
-		super(null);
-		Log.e(TAG, THE_DEFAULT_CONSTRUCTOR_WAS_CALLED);
-		throw new IllegalStateException(THE_DEFAULT_CONSTRUCTOR_WAS_CALLED);
+    private FractionReflector() {
+        // We should never be here...
+        super(null);
+        Log.e(TAG, THE_DEFAULT_CONSTRUCTOR_WAS_CALLED);
+        throw new IllegalStateException(THE_DEFAULT_CONSTRUCTOR_WAS_CALLED);
 
-	}
+    }
 
-	protected FractionReflector(final String packageName) {
-		super(packageName);
-	}
+    protected FractionReflector(final String packageName) {
+        super(packageName);
+    }
 
-	@Override
-	protected String getLogTag() {
-		return TAG;
-	}
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
 
-	@Override
-	public ResourceType getResourceType() {
-		return RESOURCE_TYPE;
-	}
+    @Override
+    public ResourceType getResourceType() {
+        return RESOURCE_TYPE;
+    }
 }
