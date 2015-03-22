@@ -32,7 +32,7 @@ public class GenericCheckActivity extends BaseListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generic_list);
 
-        final List<String> resourceList = geMirror().getReflector(getResourceType()).getResourceList();
+        final List<String> resourceList = geMirror().get(getResourceType()).getResourceList();
         final ListAdapter adapter = new GenericAdapter(
                 this,
                 geMirror(),

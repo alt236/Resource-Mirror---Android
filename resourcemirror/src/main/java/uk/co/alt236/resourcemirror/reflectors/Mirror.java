@@ -242,7 +242,7 @@ public class Mirror {
      * @return the {@link uk.co.alt236.resourcemirror.reflectors.base.ResourceReflector} requested
      * @throws java.lang.IllegalArgumentException if an unknown or null {@link uk.co.alt236.resourcemirror.util.ResourceType} is requested.
      */
-    public ResourceReflector getReflector(final ResourceType resource) {
+    public ResourceReflector get(final ResourceType resource) {
         final ResourceReflector methodResult;
         if (resource == null) {
             throw new IllegalArgumentException("Cannot have null as a resource type...");

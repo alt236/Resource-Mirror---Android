@@ -101,7 +101,7 @@ public class GenericAdapter extends ArrayAdapter<String> {
 
         public void populateFrom(final String resourceName) {
             if (resourceName != null) {
-                final long id = mMirror.getReflector(mResourceType).optResourceId(resourceName, 0);
+                final long id = mMirror.get(mResourceType).optResourceId(resourceName, 0);
                 getName().setText(resourceName);
 
                 if (id > 0) {
