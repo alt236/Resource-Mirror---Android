@@ -32,95 +32,95 @@ import uk.co.alt236.resourcemirror.reflectors.Mirror;
 import uk.co.alt236.resourcemirror.reflectors.base.ResourceKeyFormatter;
 import uk.co.alt236.resourcemirrorsampleapp.R;
 
-public class DrawableAdapter extends ArrayAdapter<String>{
-	private final static int mLayout = R.layout.list_item_icon_check;
-	private final static int mMissingIconId = R.drawable.ic_missing_icon;
+public class DrawableAdapter extends ArrayAdapter<String> {
+    private final static int mLayout = R.layout.list_item_icon_check;
+    private final static int mMissingIconId = R.drawable.ic_missing_icon;
 
-	//private final Context mContext;
-	private final List<String> mItemList;
-	private final Random mRandom;
-	private final Mirror mMirror;
+    //private final Context mContext;
+    private final List<String> mItemList;
+    private final Random mRandom;
+    private final Mirror mMirror;
     private final LayoutInflater mLayoutInflater;
     private final ResourceKeyFormatter mKeyFormatter;
 
-	public DrawableAdapter(final Context context, final Mirror mirror, final List<String> itemList) {
-		super(context, mLayout);
+    public DrawableAdapter(final Context context, final Mirror mirror, final List<String> itemList) {
+        super(context, mLayout);
         mKeyFormatter = new ResourceKeyFormatter();
-		mItemList = itemList;
+        mItemList = itemList;
         mMirror = mirror;
-		mRandom = new Random();
+        mRandom = new Random();
         mLayoutInflater = LayoutInflater.from(context);
-	}
+    }
 
-	@Override
-	public View getView(final int position, final View convertView, final ViewGroup parent) {
+    @Override
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
 
-		final View row;
-		final Wrapper wrapper;
+        final View row;
+        final Wrapper wrapper;
 
-		if (convertView == null) {
-			row = mLayoutInflater.inflate(mLayout, null);
-			wrapper = new Wrapper(row);
-			row.setTag(wrapper);
-		} else {
+        if (convertView == null) {
+            row = mLayoutInflater.inflate(mLayout, null);
+            wrapper = new Wrapper(row);
+            row.setTag(wrapper);
+        } else {
             row = convertView;
-			wrapper = (Wrapper) row.getTag();
-		}
+            wrapper = (Wrapper) row.getTag();
+        }
 
-		wrapper.populateFrom(getItem(position));
+        wrapper.populateFrom(getItem(position));
 
-		return (row);
-	}
+        return (row);
+    }
 
-	@Override
-	public String getItem(final int position) {
-		return mItemList.get(position);
-	}
+    @Override
+    public String getItem(final int position) {
+        return mItemList.get(position);
+    }
 
-	@Override
-	public int getCount() {
-		return mItemList.size();
-	}
+    @Override
+    public int getCount() {
+        return mItemList.size();
+    }
 
-	private class Wrapper {
+    private class Wrapper {
 
-		private TextView name = null;
-		private ImageView image1 = null;
+        private TextView name = null;
+        private ImageView image1 = null;
 
-		private View row = null;
+        private View row = null;
 
-		public Wrapper(final View row) {
-			this.row = row;
-		}
+        public Wrapper(final View row) {
+            this.row = row;
+        }
 
-		public ImageView getImage1() {
-			if (image1 == null) {
-				image1 = (ImageView) row.findViewById(R.id.image1);
-			}
-			return(image1);
-		}
+        public ImageView getImage1() {
+            if (image1 == null) {
+                image1 = (ImageView) row.findViewById(R.id.image1);
+            }
+            return (image1);
+        }
 
-		public TextView getName() {
-			if (name == null) {
-				name = (TextView) row.findViewById(R.id.name);
-			}
-			return(name);
-		}
+        public TextView getName() {
+            if (name == null) {
+                name = (TextView) row.findViewById(R.id.name);
+            }
+            return (name);
+        }
 
-		public void populateFrom(final String iconName) {
-			if (iconName != null) {
-				final String fullName = DrawableReflector.ICON_PREFIX_MENU.concat(
+        public void populateFrom(final String iconName) {
+            if (iconName != null) {
+                final String fullName = DrawableReflector.ICON_PREFIX_MENU.concat(
                         mKeyFormatter.formatKey(
-						iconName,
-						IconArray.FAMILY_ARRAY[mRandom.nextInt(IconArray.FAMILY_ARRAY.length)]));
+                                iconName,
+                                IconArray.FAMILY_ARRAY[mRandom.nextInt(IconArray.FAMILY_ARRAY.length)]));
 
-				getImage1().setImageResource(
-						mMirror.getDrawables().optResourceId(
-								fullName,
-								mMissingIconId));
+                getImage1().setImageResource(
+                        mMirror.getDrawables().optResourceId(
+                                fullName,
+                                mMissingIconId));
 
-				getName().setText(fullName);
-			}
-		}
-	}
+                getName().setText(fullName);
+            }
+        }
+    }
 }

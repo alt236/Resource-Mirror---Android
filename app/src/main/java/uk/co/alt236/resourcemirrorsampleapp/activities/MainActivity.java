@@ -33,121 +33,121 @@ import uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.BaseLi
 import uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.DrawableCheckActivity;
 import uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.GenericCheckActivity;
 
-public class MainActivity extends BaseListActivity{
-	public static final String EXTRA_RESOURCE_NAME = "EXTRA_RESOURCE_NAME";
+public class MainActivity extends BaseListActivity {
+    public static final String EXTRA_RESOURCE_NAME = "EXTRA_RESOURCE_NAME";
 
-	ListAdapter mAdapter;
+    ListAdapter mAdapter;
 
-	@Override
-	public void onCreate(final Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-		final List<String> resources = geMirror().getResourceTypes();
+        final List<String> resources = geMirror().getResourceTypes();
 
-		Collections.sort(resources);
+        Collections.sort(resources);
 
-		final ListAdapter adapter = new ArrayAdapter<String>(
-				this,
-				android.R.layout.simple_list_item_1,
-				android.R.id.text1,
-				resources);
+        final ListAdapter adapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                resources);
 
-		setListAdapter(adapter);
-	}
+        setListAdapter(adapter);
+    }
 
-	@Override
-	protected void onListItemClick(final ListView l, final View v, final int position, final long id) {
-		final String resourceName = ((TextView) v.findViewById(android.R.id.text1)).getText().toString();
+    @Override
+    protected void onListItemClick(final ListView l, final View v, final int position, final long id) {
+        final String resourceName = ((TextView) v.findViewById(android.R.id.text1)).getText().toString();
 
 
-		final Intent intent;
-		final Bundle bundle = new Bundle();
+        final Intent intent;
+        final Bundle bundle = new Bundle();
 
-		if(resourceName == null){
-			intent = null;
-		} else {
-			final ResourceType type = ResourceType.fromString(resourceName);
-			if(type == null){
-				intent = null;
-			} else {
-				switch(type){
-				case ANIM:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case ANIMATOR:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case ARRAY:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case ATTR:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case BOOL:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case COLOR:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case DIMEN:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case DRAWABLE:
-					intent = new Intent(this, DrawableCheckActivity.class);
-					break;
-				case FRACTION:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case ID:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case INTEGER:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case INTERPOLATOR:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case LAYOUT:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case MENU:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case MIPMAP:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case PLURALS:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case RAW:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case STRING:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case STYLEABLE:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case STYLE:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				case XML:
-					intent = new Intent(this, GenericCheckActivity.class);
-					break;
-				default:
-					intent = null;
-					break;
-				}
-			}
-		}
+        if (resourceName == null) {
+            intent = null;
+        } else {
+            final ResourceType type = ResourceType.fromString(resourceName);
+            if (type == null) {
+                intent = null;
+            } else {
+                switch (type) {
+                    case ANIM:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case ANIMATOR:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case ARRAY:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case ATTR:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case BOOL:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case COLOR:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case DIMEN:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case DRAWABLE:
+                        intent = new Intent(this, DrawableCheckActivity.class);
+                        break;
+                    case FRACTION:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case ID:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case INTEGER:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case INTERPOLATOR:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case LAYOUT:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case MENU:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case MIPMAP:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case PLURALS:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case RAW:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case STRING:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case STYLEABLE:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case STYLE:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    case XML:
+                        intent = new Intent(this, GenericCheckActivity.class);
+                        break;
+                    default:
+                        intent = null;
+                        break;
+                }
+            }
+        }
 
-		if(intent == null){
-			Toast.makeText(this, "Intent not setup for " + resourceName, Toast.LENGTH_SHORT).show();
-		} else {
-			bundle.putString(EXTRA_RESOURCE_NAME, resourceName);
-			intent.putExtras(bundle);
-			startActivity(intent);
-		}
-	}
+        if (intent == null) {
+            Toast.makeText(this, "Intent not setup for " + resourceName, Toast.LENGTH_SHORT).show();
+        } else {
+            bundle.putString(EXTRA_RESOURCE_NAME, resourceName);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+    }
 }

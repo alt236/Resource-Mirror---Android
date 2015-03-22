@@ -8,21 +8,21 @@ import java.util.List;
 import uk.co.alt236.resourcemirrorsampleapp.R;
 import uk.co.alt236.resourcemirrorsampleapp.util.GenericAdapter;
 
-public class GenericCheckActivity extends BaseListActivity{
+public class GenericCheckActivity extends BaseListActivity {
 
 
-	@Override
-	public void onCreate(final Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_generic_list);
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_generic_list);
 
-		final List<String> resourceList = geMirror().getReflector(getResourceType()).getResourceList();
-		final ListAdapter adapter = new GenericAdapter(
-				this,
+        final List<String> resourceList = geMirror().getReflector(getResourceType()).getResourceList();
+        final ListAdapter adapter = new GenericAdapter(
+                this,
                 geMirror(),
-				getResourceType(),
-				resourceList);
+                getResourceType(),
+                resourceList);
 
-		setListAdapter(adapter);
-	}
+        setListAdapter(adapter);
+    }
 }

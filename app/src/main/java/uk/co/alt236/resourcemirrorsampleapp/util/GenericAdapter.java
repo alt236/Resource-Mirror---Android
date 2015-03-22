@@ -28,88 +28,88 @@ import java.util.List;
 import uk.co.alt236.resourcemirror.reflectors.Mirror;
 import uk.co.alt236.resourcemirror.util.ResourceType;
 
-public class GenericAdapter extends ArrayAdapter<String>{
-	private final static int mLayout = android.R.layout.simple_list_item_2;
+public class GenericAdapter extends ArrayAdapter<String> {
+    private final static int mLayout = android.R.layout.simple_list_item_2;
 
-	private final List<String> mItemList;
-	private final Mirror mMirror;
-	private final ResourceType mResourceType;
+    private final List<String> mItemList;
+    private final Mirror mMirror;
+    private final ResourceType mResourceType;
     private final LayoutInflater mLayoutInflater;
 
-	public GenericAdapter(final Context context, final Mirror mirror, final ResourceType resourceType, final List<String> itemList) {
-		super(context, mLayout);
-		mItemList = itemList;
+    public GenericAdapter(final Context context, final Mirror mirror, final ResourceType resourceType, final List<String> itemList) {
+        super(context, mLayout);
+        mItemList = itemList;
         mMirror = mirror;
-		mResourceType = resourceType;
+        mResourceType = resourceType;
         mLayoutInflater = LayoutInflater.from(context);
-	}
+    }
 
-	@Override
-	public View getView(final int position, final View convertView, final ViewGroup parent) {
+    @Override
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
 
-		final View row;
-		final Wrapper wrapper;
+        final View row;
+        final Wrapper wrapper;
 
-		if (convertView == null) {
-			row = mLayoutInflater.inflate(mLayout, null);
-			wrapper = new Wrapper(row);
-			row.setTag(wrapper);
-		} else {
+        if (convertView == null) {
+            row = mLayoutInflater.inflate(mLayout, null);
+            wrapper = new Wrapper(row);
+            row.setTag(wrapper);
+        } else {
             row = convertView;
-			wrapper = (Wrapper) row.getTag();
-		}
+            wrapper = (Wrapper) row.getTag();
+        }
 
-		wrapper.populateFrom(getItem(position));
+        wrapper.populateFrom(getItem(position));
 
-		return (row);
-	}
+        return (row);
+    }
 
-	@Override
-	public String getItem(final int position) {
-		return mItemList.get(position);
-	}
+    @Override
+    public String getItem(final int position) {
+        return mItemList.get(position);
+    }
 
-	@Override
-	public int getCount() {
-		return mItemList.size();
-	}
+    @Override
+    public int getCount() {
+        return mItemList.size();
+    }
 
-	private class Wrapper {
+    private class Wrapper {
 
-		private TextView name = null;
-		private TextView id = null;
+        private TextView name = null;
+        private TextView id = null;
 
-		private View row = null;
+        private View row = null;
 
-		public Wrapper(final View row) {
-			this.row = row;
-		}
+        public Wrapper(final View row) {
+            this.row = row;
+        }
 
-		public TextView getName() {
-			if (name == null) {
-				name = (TextView) row.findViewById(android.R.id.text1);
-			}
-			return(name);
-		}
+        public TextView getName() {
+            if (name == null) {
+                name = (TextView) row.findViewById(android.R.id.text1);
+            }
+            return (name);
+        }
 
-		public TextView getId() {
-			if (id == null) {
-				id = (TextView) row.findViewById(android.R.id.text2);
-			}
-			return(id);
-		}
+        public TextView getId() {
+            if (id == null) {
+                id = (TextView) row.findViewById(android.R.id.text2);
+            }
+            return (id);
+        }
 
-		public void populateFrom(final String resourceName) {
-			if (resourceName != null) {
-				final long id = mMirror.getReflector(mResourceType).optResourceId(resourceName, 0);
-				getName().setText(resourceName);
+        public void populateFrom(final String resourceName) {
+            if (resourceName != null) {
+                final long id = mMirror.getReflector(mResourceType).optResourceId(resourceName, 0);
+                getName().setText(resourceName);
 
-				if(id > 0){
-					getId().setText("0x" + Long.toHexString(id));
-				} else {
-					getId().setText("Not found");
-				}
-			}
-		}
-	}
+                if (id > 0) {
+                    getId().setText("0x" + Long.toHexString(id));
+                } else {
+                    getId().setText("Not found");
+                }
+            }
+        }
+    }
 }
