@@ -12,8 +12,8 @@ public abstract class BaseListActivity extends ListActivity{
 	private ResourceType mResourceType;
 
 	protected Mirror geMirror(){
-		//return Mirror.on("android");
-		return Mirror.with(this);
+		//return Mirror.of("android");
+		return Mirror.of(this);
 	}
 
 	protected ResourceType getResourceType(){

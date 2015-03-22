@@ -14,13 +14,13 @@ import uk.co.alt236.resourcemirror.util.ResourceType;
  * Copyright 2013 Alexandros Schillings
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
+ * use this file except in compliance of the License. You may obtain a copy of
  * the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * distributed under the License is distributed of an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
@@ -448,17 +448,24 @@ public class Mirror {
 	}
 
 	/**
-	 * Returns an instance of the ReflectiveDrawableLoader
+	 * Returns an instance of the {@link uk.co.alt236.resourcemirror.reflectors.Mirror}
 	 *
 	 * @param context
 	 *            A standard Android context. It cannot be null
-	 * @return The instance of the ReflectiveDrawableLoader
+	 * @return The instance of the {@link uk.co.alt236.resourcemirror.reflectors.Mirror}
 	 */
-	public static Mirror with(final Context context) {
-		return on(context.getApplicationContext().getPackageName());
+	public static Mirror of(final Context context) {
+		return of(context.getApplicationContext().getPackageName());
 	}
 
-	public static Mirror on(final String packageName) {
+    /**
+     * Returns an instance of the {@link uk.co.alt236.resourcemirror.reflectors.Mirror}
+     *
+     * @param packageName
+     *            The package name to try and reflect off.
+     * @return The instance of the {@link uk.co.alt236.resourcemirror.reflectors.Mirror}
+     */
+	public static Mirror of(final String packageName) {
 		synchronized (MAP_LOCK) {
 			if(!MAP_OF_LOADERS.containsKey(packageName)){
 				MAP_OF_LOADERS.put(packageName, new Mirror(packageName));
