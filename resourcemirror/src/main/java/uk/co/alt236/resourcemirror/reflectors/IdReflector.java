@@ -22,8 +22,8 @@ import uk.co.alt236.resourcemirror.reflectors.base.AbstractResourceReflector;
 import uk.co.alt236.resourcemirror.util.ResourceType;
 
 public final class IdReflector extends AbstractResourceReflector {
-    private final String TAG = getClass().getName();
     private static final ResourceType RESOURCE_TYPE = ResourceType.ID;
+    private final String TAG = getClass().getName();
 
     private IdReflector() {
         // We should never be here...

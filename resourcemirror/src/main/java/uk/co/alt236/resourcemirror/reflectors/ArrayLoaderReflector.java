@@ -23,8 +23,8 @@ import uk.co.alt236.resourcemirror.util.ResourceType;
 
 public final class ArrayLoaderReflector extends AbstractResourceReflector {
 
-    private final String TAG = getClass().getName();
     private static final ResourceType RESOURCE_TYPE = ResourceType.ARRAY;
+    private final String TAG = getClass().getName();
 
     private ArrayLoaderReflector() {
         // We should never be here...

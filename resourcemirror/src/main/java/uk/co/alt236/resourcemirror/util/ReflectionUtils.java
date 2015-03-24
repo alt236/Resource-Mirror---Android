@@ -16,14 +16,14 @@
 
 package uk.co.alt236.resourcemirror.util;
 
+import android.util.Log;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import android.util.Log;
 
 public class ReflectionUtils {
     private final String TAG = getClass().getName();

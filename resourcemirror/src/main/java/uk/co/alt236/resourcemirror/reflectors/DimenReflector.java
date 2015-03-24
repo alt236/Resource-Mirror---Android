@@ -22,8 +22,8 @@ import uk.co.alt236.resourcemirror.reflectors.base.AbstractResourceReflector;
 import uk.co.alt236.resourcemirror.util.ResourceType;
 
 public final class DimenReflector extends AbstractResourceReflector {
-    private final String TAG = getClass().getName();
     private static final ResourceType RESOURCE_TYPE = ResourceType.DIMEN;
+    private final String TAG = getClass().getName();
 
     private DimenReflector() {
         // We should never be here...

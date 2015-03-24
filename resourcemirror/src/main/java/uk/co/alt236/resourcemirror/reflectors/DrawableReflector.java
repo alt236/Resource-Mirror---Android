@@ -33,10 +33,9 @@ public final class DrawableReflector extends AbstractResourceReflector {
     public static final String ICON_PREFIX_TAB = ICON_PREFIX_BASE + "tab_";
     public static final String ICON_PREFIX_DIALOG = ICON_PREFIX_BASE + "dialog_";
     public static final String ICON_PREFIX_LIST = ICON_PREFIX_BASE + "list_";
-
+    private static final ResourceType RESOURCE_TYPE = ResourceType.DRAWABLE;
     private final String TAG = getClass().getName();
     private final AtomicBoolean mAddDrawableNameToContainer;
-    private static final ResourceType RESOURCE_TYPE = ResourceType.DRAWABLE;
 
     private DrawableReflector() {
         // We should never be here...

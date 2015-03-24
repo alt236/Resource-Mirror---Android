@@ -30,12 +30,11 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
     protected static final String THE_DEFAULT_CONSTRUCTOR_WAS_CALLED = "The default Constructor was called! This should never happen...";
     private static final boolean TIME_LOGGING_ENABLED = false;
     private static final int CACHE_SIZE = 100;
-
+    protected final ResourceKeyFormatter mKeyFormatter;
     private final AtomicBoolean mLogErrors;
     private final ReflectionUtils mReflectionUtils;
     private final Map<String, Integer> mCache;
     private final Map<String, Object> mCacheMisses;
-    protected final ResourceKeyFormatter mKeyFormatter;
 
     protected AbstractResourceReflector(final String packageName) {
         if (packageName == null) {

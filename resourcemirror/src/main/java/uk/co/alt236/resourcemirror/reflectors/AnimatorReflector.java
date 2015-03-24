@@ -23,8 +23,8 @@ import uk.co.alt236.resourcemirror.util.ResourceType;
 
 public final class AnimatorReflector extends AbstractResourceReflector {
 
-    private final String TAG = getClass().getName();
     private static final ResourceType RESOURCE_TYPE = ResourceType.ANIMATOR;
+    private final String TAG = getClass().getName();
 
     private AnimatorReflector() {
         // We should never be here...

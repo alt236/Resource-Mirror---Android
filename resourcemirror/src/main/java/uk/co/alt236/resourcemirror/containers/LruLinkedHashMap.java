@@ -20,11 +20,8 @@ import java.util.Map;
 
 public class LruLinkedHashMap<K, V> extends LinkedHashMap<K, V> {
 
-    private final int mMaxEntries;
-    /**
-     *
-     */
     private static final long serialVersionUID = -1575270872785732340L;
+    private final int mMaxEntries;
 
     public LruLinkedHashMap(final int maxEntries, final float loadFactor) {
         super(maxEntries + 1, loadFactor, true);

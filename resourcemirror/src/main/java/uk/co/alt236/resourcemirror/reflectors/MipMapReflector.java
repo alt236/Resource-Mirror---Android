@@ -23,8 +23,8 @@ import uk.co.alt236.resourcemirror.reflectors.base.AbstractResourceReflector;
 import uk.co.alt236.resourcemirror.util.ResourceType;
 
 public final class MipMapReflector extends AbstractResourceReflector {
-    private final String TAG = getClass().getName();
     private static final ResourceType RESOURCE_TYPE = ResourceType.MIPMAP;
+    private final String TAG = getClass().getName();
 
     private MipMapReflector() {
         // We should never be here...

@@ -28,7 +28,7 @@ public class ResourceKeyFormatter {
     }
 
     public String formatKey(final String prefix, final String name, final String family) {
-        if(TextUtils.isEmpty(prefix)){
+        if (TextUtils.isEmpty(prefix)) {
             return formatKey(name, family);
         } else {
             return prefix.concat(formatKey(name, family));

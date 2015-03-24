@@ -40,6 +40,89 @@ public class Mirror {
         mResourceLoaders = new HashMap<ResourceType, AbstractResourceReflector>();
     }
 
+    /**
+     * Gets the appropriate Resource loader for the requested {@link uk.co.alt236.resourcemirror.util.ResourceType};
+     *
+     * @param resource the {@link uk.co.alt236.resourcemirror.util.ResourceType} needed.
+     * @return the {@link uk.co.alt236.resourcemirror.reflectors.base.ResourceReflector} requested
+     * @throws java.lang.IllegalArgumentException if an unknown or null {@link uk.co.alt236.resourcemirror.util.ResourceType} is requested.
+     */
+    public ResourceReflector get(final ResourceType resource) {
+        final ResourceReflector methodResult;
+        if (resource == null) {
+            throw new IllegalArgumentException("Cannot have null as a resource type...");
+        } else {
+            switch (resource) {
+                case ANIM:
+                    methodResult = getAnimations();
+                    break;
+                case ANIMATOR:
+                    methodResult = getAnimators();
+                    break;
+                case ARRAY:
+                    methodResult = getArrays();
+                    break;
+                case ATTR:
+                    methodResult = getAttrs();
+                    break;
+                case BOOL:
+                    methodResult = getBooleans();
+                    break;
+                case COLOR:
+                    methodResult = getColors();
+                    break;
+                case DIMEN:
+                    methodResult = getDimens();
+                    break;
+                case DRAWABLE:
+                    methodResult = getDrawables();
+                    break;
+                case FRACTION:
+                    methodResult = getFractions();
+                    break;
+                case ID:
+                    methodResult = getIds();
+                    break;
+                case INTEGER:
+                    methodResult = getIntegers();
+                    break;
+                case INTERPOLATOR:
+                    methodResult = getInterpolators();
+                    break;
+                case LAYOUT:
+                    methodResult = getLayouts();
+                    break;
+                case MENU:
+                    methodResult = getMenus();
+                    break;
+                case MIPMAP:
+                    methodResult = getMipMaps();
+                    break;
+                case PLURALS:
+                    methodResult = getPlurals();
+                    break;
+                case RAW:
+                    methodResult = getRaws();
+                    break;
+                case STRING:
+                    methodResult = getStrings();
+                    break;
+                case STYLEABLE:
+                    methodResult = getStyleables();
+                    break;
+                case STYLE:
+                    methodResult = getStyles();
+                    break;
+                case XML:
+                    methodResult = getXmls();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown resource type '" + resource + "'");
+            }
+        }
+        return methodResult;
+    }
+
     public AnimationReflector getAnimations() {
         final ResourceType type = ResourceType.ANIM;
         final AbstractResourceReflector methodResult;
@@ -235,89 +318,6 @@ public class Mirror {
         return (LayoutReflector) methodResult;
     }
 
-    /**
-     * Gets the appropriate Resource loader for the requested {@link uk.co.alt236.resourcemirror.util.ResourceType};
-     *
-     * @param resource the {@link uk.co.alt236.resourcemirror.util.ResourceType} needed.
-     * @return the {@link uk.co.alt236.resourcemirror.reflectors.base.ResourceReflector} requested
-     * @throws java.lang.IllegalArgumentException if an unknown or null {@link uk.co.alt236.resourcemirror.util.ResourceType} is requested.
-     */
-    public ResourceReflector get(final ResourceType resource) {
-        final ResourceReflector methodResult;
-        if (resource == null) {
-            throw new IllegalArgumentException("Cannot have null as a resource type...");
-        } else {
-            switch (resource) {
-                case ANIM:
-                    methodResult = getAnimations();
-                    break;
-                case ANIMATOR:
-                    methodResult = getAnimators();
-                    break;
-                case ARRAY:
-                    methodResult = getArrays();
-                    break;
-                case ATTR:
-                    methodResult = getAttrs();
-                    break;
-                case BOOL:
-                    methodResult = getBooleans();
-                    break;
-                case COLOR:
-                    methodResult = getColors();
-                    break;
-                case DIMEN:
-                    methodResult = getDimens();
-                    break;
-                case DRAWABLE:
-                    methodResult = getDrawables();
-                    break;
-                case FRACTION:
-                    methodResult = getFractions();
-                    break;
-                case ID:
-                    methodResult = getIds();
-                    break;
-                case INTEGER:
-                    methodResult = getIntegers();
-                    break;
-                case INTERPOLATOR:
-                    methodResult = getInterpolators();
-                    break;
-                case LAYOUT:
-                    methodResult = getLayouts();
-                    break;
-                case MENU:
-                    methodResult = getMenus();
-                    break;
-                case MIPMAP:
-                    methodResult = getMipMaps();
-                    break;
-                case PLURALS:
-                    methodResult = getPlurals();
-                    break;
-                case RAW:
-                    methodResult = getRaws();
-                    break;
-                case STRING:
-                    methodResult = getStrings();
-                    break;
-                case STYLEABLE:
-                    methodResult = getStyleables();
-                    break;
-                case STYLE:
-                    methodResult = getStyles();
-                    break;
-                case XML:
-                    methodResult = getXmls();
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unknown resource type '" + resource + "'");
-            }
-        }
-        return methodResult;
-    }
-
     public MenuReflector getMenus() {
         final ResourceType type = ResourceType.MENU;
         final AbstractResourceReflector methodResult;
@@ -447,6 +447,18 @@ public class Mirror {
         return (XmlReflector) methodResult;
     }
 
+    public static void clear() {
+        synchronized (MAP_LOCK) {
+            MAP_OF_MIRRORS.clear();
+        }
+    }
+
+    public static int getNumberOfMirrors() {
+        synchronized (MAP_LOCK) {
+            return MAP_OF_MIRRORS.size();
+        }
+    }
+
     /**
      * Returns an instance of the {@link uk.co.alt236.resourcemirror.reflectors.Mirror}
      *
@@ -471,17 +483,5 @@ public class Mirror {
         }
 
         return MAP_OF_MIRRORS.get(packageName);
-    }
-
-    public static void clear() {
-        synchronized (MAP_LOCK) {
-            MAP_OF_MIRRORS.clear();
-        }
-    }
-
-    public static int getNumberOfMirrors() {
-        synchronized (MAP_LOCK) {
-           return MAP_OF_MIRRORS.size();
-        }
     }
 }
