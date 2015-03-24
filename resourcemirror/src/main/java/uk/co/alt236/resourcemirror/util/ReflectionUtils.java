@@ -135,7 +135,7 @@ public class ReflectionUtils {
     public int reflectResource(final ResourceType type, final String fieldName, final int defaultValue, final boolean reportFailure) {
         final String resourceLocation = getResourceLocation(type);
 
-        final int error;
+        int error;
         try {
             final Field field = getResourceClass(resourceLocation).getField(fieldName);
             if (field.getType().equals(int.class)) {

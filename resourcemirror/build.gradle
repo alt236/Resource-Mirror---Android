@@ -16,6 +16,12 @@
 
 apply plugin: 'com.android.library'
 
+ext {
+    PUBLISH_GROUP_ID = 'com.blundell'
+    PUBLISH_ARTIFACT_ID = 'resource-mirror-android-library'
+    PUBLISH_VERSION = '0.0.1'
+}
+
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
@@ -23,8 +29,6 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
     }
     buildTypes {
         release {
@@ -38,3 +42,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
 }
+
+apply from: 'android-release-aar.gradle'
