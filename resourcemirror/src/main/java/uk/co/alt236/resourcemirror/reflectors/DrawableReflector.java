@@ -79,7 +79,7 @@ public final class DrawableReflector extends AbstractResourceReflector {
      * @return The Id of the Drawable to display.
      */
     public int optDialogDrawable(final String drawableName, final String family, final int fallbackDrawableId) {
-        return optResourceId(ICON_PREFIX_DIALOG + mKeyFormatter.formatKey(drawableName, family), fallbackDrawableId);
+        return optResourceId(mKeyFormatter.formatKey(ICON_PREFIX_DIALOG, drawableName, family), fallbackDrawableId);
     }
 
     /**
@@ -99,7 +99,7 @@ public final class DrawableReflector extends AbstractResourceReflector {
      * data.
      */
     public DrawableResourceContainer optDialogDrawableContainer(final String drawableName, final String family, final String colorString, final int fallbackDrawableId) {
-        return fetchDrawableContainer(ICON_PREFIX_DIALOG + mKeyFormatter.formatKey(drawableName, family), colorString, fallbackDrawableId);
+        return fetchDrawableContainer(mKeyFormatter.formatKey(ICON_PREFIX_DIALOG, drawableName, family), colorString, fallbackDrawableId);
     }
 
     /**
@@ -157,7 +157,7 @@ public final class DrawableReflector extends AbstractResourceReflector {
      * data.
      */
     public DrawableResourceContainer optLauncherDrawableContainer(final String drawableName, final String family, final String colorString, final int fallbackDrawableId) {
-        return fetchDrawableContainer(ICON_PREFIX_LAUNCHER + mKeyFormatter.formatKey(drawableName, family), colorString, fallbackDrawableId);
+        return fetchDrawableContainer(mKeyFormatter.formatKey(ICON_PREFIX_LAUNCHER, drawableName, family), colorString, fallbackDrawableId);
     }
 
     /**
@@ -174,7 +174,7 @@ public final class DrawableReflector extends AbstractResourceReflector {
      * @return The Id of the Drawable to display.
      */
     public int optLauncherDrawableId(final String drawableName, final String family, final int fallbackDrawableId) {
-        return optResourceId(ICON_PREFIX_LAUNCHER + mKeyFormatter.formatKey(drawableName, family), fallbackDrawableId);
+        return optResourceId(mKeyFormatter.formatKey(ICON_PREFIX_LAUNCHER, drawableName, family), fallbackDrawableId);
     }
 
     /**
@@ -194,7 +194,7 @@ public final class DrawableReflector extends AbstractResourceReflector {
      * data.
      */
     public DrawableResourceContainer optListDrawableContainer(final String drawableName, final String family, final String colorString, final int fallbackDrawableId) {
-        return fetchDrawableContainer(ICON_PREFIX_LIST + mKeyFormatter.formatKey(drawableName, family), colorString, fallbackDrawableId);
+        return fetchDrawableContainer(mKeyFormatter.formatKey(ICON_PREFIX_LIST, drawableName, family), colorString, fallbackDrawableId);
     }
 
     /**
@@ -211,7 +211,7 @@ public final class DrawableReflector extends AbstractResourceReflector {
      * @return The Id of the Drawable to display.
      */
     public int optListDrawableId(final String drawableName, final String family, final int fallbackDrawableId) {
-        return optResourceId(ICON_PREFIX_LIST + mKeyFormatter.formatKey(drawableName, family), fallbackDrawableId);
+        return optResourceId(mKeyFormatter.formatKey(ICON_PREFIX_LIST, drawableName, family), fallbackDrawableId);
     }
 
     /**
@@ -231,7 +231,7 @@ public final class DrawableReflector extends AbstractResourceReflector {
      * data.
      */
     public DrawableResourceContainer optMenuDrawableContainer(final String drawableName, final String family, final String colorString, final int fallbackDrawableId) {
-        return fetchDrawableContainer(ICON_PREFIX_MENU + mKeyFormatter.formatKey(drawableName, family), colorString, fallbackDrawableId);
+        return fetchDrawableContainer(mKeyFormatter.formatKey(ICON_PREFIX_MENU, drawableName, family), colorString, fallbackDrawableId);
     }
 
     /**
@@ -248,7 +248,7 @@ public final class DrawableReflector extends AbstractResourceReflector {
      * @return The Id of the Drawable to display.
      */
     public int optMenuDrawableId(final String drawableName, final String family, final int fallbackDrawableId) {
-        return optResourceId(ICON_PREFIX_MENU + mKeyFormatter.formatKey(drawableName, family), fallbackDrawableId);
+        return optResourceId(mKeyFormatter.formatKey(ICON_PREFIX_MENU, drawableName, family), fallbackDrawableId);
     }
 
     /**
@@ -268,7 +268,7 @@ public final class DrawableReflector extends AbstractResourceReflector {
      * data.
      */
     public DrawableResourceContainer optStatusBarDrawableContainer(final String drawableName, final String family, final String colorString, final int fallbackDrawableId) {
-        return fetchDrawableContainer(ICON_PREFIX_STATUS_BAR + mKeyFormatter.formatKey(drawableName, family), colorString, fallbackDrawableId);
+        return fetchDrawableContainer(mKeyFormatter.formatKey(ICON_PREFIX_STATUS_BAR, drawableName, family), colorString, fallbackDrawableId);
     }
 
     /**
@@ -285,7 +285,7 @@ public final class DrawableReflector extends AbstractResourceReflector {
      * @return The Id of the Drawable to display.
      */
     public int optStatusBarDrawableId(final String drawableName, final String family, final int fallbackDrawableId) {
-        return optResourceId(ICON_PREFIX_STATUS_BAR + mKeyFormatter.formatKey(drawableName, family), fallbackDrawableId);
+        return optResourceId(mKeyFormatter.formatKey(ICON_PREFIX_STATUS_BAR, drawableName, family), fallbackDrawableId);
     }
 
     /**
@@ -305,7 +305,7 @@ public final class DrawableReflector extends AbstractResourceReflector {
      * data.
      */
     public DrawableResourceContainer optTabDrawableContainer(final String drawableName, final String family, final String colorString, final int fallbackDrawableId) {
-        return fetchDrawableContainer(ICON_PREFIX_TAB + mKeyFormatter.formatKey(drawableName, family), colorString, fallbackDrawableId);
+        return fetchDrawableContainer(mKeyFormatter.formatKey(ICON_PREFIX_TAB, drawableName, family), colorString, fallbackDrawableId);
     }
 
     /**
@@ -322,7 +322,7 @@ public final class DrawableReflector extends AbstractResourceReflector {
      * @return The Id of the Drawable to display.
      */
     public int optTabDrawableId(final String drawableName, final String family, final int fallbackDrawableId) {
-        return optResourceId(ICON_PREFIX_TAB + mKeyFormatter.formatKey(drawableName, family), fallbackDrawableId);
+        return optResourceId(mKeyFormatter.formatKey(ICON_PREFIX_TAB, drawableName, family), fallbackDrawableId);
     }
 
     /**

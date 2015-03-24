@@ -20,18 +20,18 @@ import android.text.TextUtils;
 
 public class ResourceKeyFormatter {
     public String formatKey(final String name, final String family) {
-        if (!TextUtils.isEmpty(family)) {
-            return family.concat("_").concat(name);
-        } else {
+        if (TextUtils.isEmpty(family)) {
             return name;
+        } else {
+            return family.concat("_").concat(name);
         }
     }
 
     public String formatKey(final String prefix, final String name, final String family) {
-        if (!TextUtils.isEmpty(family)) {
-            return prefix.concat(family).concat(formatKey(name, family));
+        if(TextUtils.isEmpty(prefix)){
+            return formatKey(name, family);
         } else {
-            return prefix.concat(name);
+            return prefix.concat(formatKey(name, family));
         }
     }
 }
