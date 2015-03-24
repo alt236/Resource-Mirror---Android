@@ -28,7 +28,7 @@ import uk.co.alt236.resourcemirror.util.ResourceType;
 
 public class Mirror {
     private static final Object MAP_LOCK = new Object();
-    private static final Map<String, Mirror> MAP_OF_LOADERS = new HashMap<String, Mirror>();
+    private static final Map<String, Mirror> MAP_OF_MIRRORS = new HashMap<String, Mirror>();
 
     private final Object mResourceLoaderCreationLock = new Object();
 
@@ -465,12 +465,23 @@ public class Mirror {
      */
     public static Mirror of(final String packageName) {
         synchronized (MAP_LOCK) {
-            if (!MAP_OF_LOADERS.containsKey(packageName)) {
-                MAP_OF_LOADERS.put(packageName, new Mirror(packageName));
+            if (!MAP_OF_MIRRORS.containsKey(packageName)) {
+                MAP_OF_MIRRORS.put(packageName, new Mirror(packageName));
             }
         }
 
-        return MAP_OF_LOADERS.get(packageName);
+        return MAP_OF_MIRRORS.get(packageName);
     }
 
+    public static void clear() {
+        synchronized (MAP_LOCK) {
+            MAP_OF_MIRRORS.clear();
+        }
+    }
+
+    public static int getNumberOfMirrors() {
+        synchronized (MAP_LOCK) {
+           return MAP_OF_MIRRORS.size();
+        }
+    }
 }
