@@ -14,22 +14,32 @@
  * limitations under the License.
  */
 
-package uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities;
+package uk.co.alt236.resourcemirrorsampleapp.activities;
 
-import android.app.ListActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import uk.co.alt236.resourcemirror.reflectors.Mirror;
 import uk.co.alt236.resourcemirror.util.ResourceType;
-import uk.co.alt236.resourcemirrorsampleapp.activities.MainActivity;
 
-public abstract class BaseListActivity extends ListActivity {
+public abstract class BaseListActivity extends ActionBarActivity {
     private ResourceType mResourceType;
+    private ListView mListView;
 
     protected Mirror geMirror() {
-        //return Mirror.of("android");
-        return Mirror.of(this);
+        final String packageName = getIntent().getExtras().getString(MainActivity.EXTRA_PACKAGE_NAME, null);
+        if(packageName == null){
+            return Mirror.of(this);
+        } else {
+            return Mirror.of(packageName);
+        }
+    }
+
+    public ListView getListView(){
+        return mListView;
     }
 
     protected ResourceType getResourceType() {
@@ -41,9 +51,19 @@ public abstract class BaseListActivity extends ListActivity {
         super.onCreate(savedInstanceState);
 
         final Bundle b = getIntent().getExtras();
-        if (b != null && !TextUtils.isEmpty(b.getString(MainActivity.EXTRA_RESOURCE_NAME))) {
-            mResourceType = ResourceType.fromString(b.getString(MainActivity.EXTRA_RESOURCE_NAME));
+        if (b != null && !TextUtils.isEmpty(b.getString(ResourceListActivity.EXTRA_RESOURCE_NAME))) {
+            mResourceType = ResourceType.fromString(b.getString(ResourceListActivity.EXTRA_RESOURCE_NAME));
             setTitle(mResourceType.getResourceName());
         }
+    }
+
+    @Override
+    public void setContentView(final int layoutId){
+        super.setContentView(layoutId);
+        mListView = (ListView) findViewById(android.R.id.list);
+    }
+
+    public void setListAdapter(final ListAdapter adapter){
+        getListView().setAdapter(adapter);
     }
 }

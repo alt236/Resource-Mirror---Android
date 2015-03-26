@@ -14,13 +14,13 @@
   ~ limitations under the License.
   -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="uk.co.alt236.resourcemirrorsampleapp">
+<manifest package="uk.co.alt236.resourcemirrorsampleapp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
-        android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
         <activity android:name="uk.co.alt236.resourcemirrorsampleapp.activities.MainActivity">
@@ -32,6 +32,8 @@
         </activity>
         <activity android:name="uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.DrawableCheckActivity" />
         <activity android:name="uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.GenericCheckActivity" />
+        <activity android:name="uk.co.alt236.resourcemirrorsampleapp.activities.ResourceListActivity" />
+
     </application>
 
 </manifest>

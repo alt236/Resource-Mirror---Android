@@ -17,135 +17,61 @@ package uk.co.alt236.resourcemirrorsampleapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Collections;
-import java.util.List;
-
-import uk.co.alt236.resourcemirror.util.ResourceType;
 import uk.co.alt236.resourcemirrorsampleapp.R;
-import uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.BaseListActivity;
-import uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.DrawableCheckActivity;
-import uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.GenericCheckActivity;
 
-public class MainActivity extends BaseListActivity {
-    public static final String EXTRA_RESOURCE_NAME = "EXTRA_RESOURCE_NAME";
-
-    ListAdapter mAdapter;
+public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+    public static final String EXTRA_PACKAGE_NAME = "EXTRA_PACKAGE_NAME";
+    private static final String[] PACKAGES = {
+            "Context",
+            "android",
+            "android.support.v7.appcompat"
+    };
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final ListView listView = (ListView) findViewById(android.R.id.list);
+        final ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, PACKAGES);
 
-        final List<String> resources = geMirror().getResourceTypes();
-
-        Collections.sort(resources);
-
-        final ListAdapter adapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
-                resources);
-
-        setListAdapter(adapter);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
     }
 
     @Override
-    protected void onListItemClick(final ListView l, final View v, final int position, final long id) {
-        final String resourceName = ((TextView) v.findViewById(android.R.id.text1)).getText().toString();
-
-
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final String label = ((TextView) view.findViewById(android.R.id.text1)).getText().toString();
         final Intent intent;
         final Bundle bundle = new Bundle();
 
-        if (resourceName == null) {
+        if (label == null) {
             intent = null;
         } else {
-            final ResourceType type = ResourceType.fromString(resourceName);
-            if (type == null) {
-                intent = null;
-            } else {
-                switch (type) {
-                    case ANIM:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case ANIMATOR:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case ARRAY:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case ATTR:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case BOOL:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case COLOR:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case DIMEN:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case DRAWABLE:
-                        intent = new Intent(this, DrawableCheckActivity.class);
-                        break;
-                    case FRACTION:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case ID:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case INTEGER:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case INTERPOLATOR:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case LAYOUT:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case MENU:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case MIPMAP:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case PLURALS:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case RAW:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case STRING:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case STYLEABLE:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case STYLE:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    case XML:
-                        intent = new Intent(this, GenericCheckActivity.class);
-                        break;
-                    default:
-                        intent = null;
-                        break;
-                }
-            }
+            intent = new Intent(this, ResourceListActivity.class);
         }
 
         if (intent == null) {
-            Toast.makeText(this, "Intent not setup for " + resourceName, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Intent not setup for " + label, Toast.LENGTH_SHORT).show();
         } else {
-            bundle.putString(EXTRA_RESOURCE_NAME, resourceName);
+            // Ok, if the text contains a '.' it is a package name
+            // Else, it means the default context...
+            final String packageName;
+            if(label.indexOf('.') == -1){
+                packageName = null;
+            } else {
+                packageName = label;
+            }
+
+            bundle.putString(EXTRA_PACKAGE_NAME, packageName);
             intent.putExtras(bundle);
             startActivity(intent);
         }

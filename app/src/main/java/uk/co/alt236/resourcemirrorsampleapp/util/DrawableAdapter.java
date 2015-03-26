@@ -109,17 +109,13 @@ public class DrawableAdapter extends ArrayAdapter<String> {
 
         public void populateFrom(final String iconName) {
             if (iconName != null) {
-                final String fullName = DrawableReflector.ICON_PREFIX_MENU.concat(
-                        mKeyFormatter.formatKey(
-                                iconName,
-                                IconArray.FAMILY_ARRAY[mRandom.nextInt(IconArray.FAMILY_ARRAY.length)]));
 
                 getImage1().setImageResource(
                         mMirror.getDrawables().optResourceId(
-                                fullName,
+                                iconName,
                                 mMissingIconId));
 
-                getName().setText(fullName);
+                getName().setText(iconName);
             }
         }
     }

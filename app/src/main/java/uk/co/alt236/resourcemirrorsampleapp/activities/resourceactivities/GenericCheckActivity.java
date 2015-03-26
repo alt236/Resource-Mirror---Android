@@ -22,6 +22,7 @@ import android.widget.ListAdapter;
 import java.util.List;
 
 import uk.co.alt236.resourcemirrorsampleapp.R;
+import uk.co.alt236.resourcemirrorsampleapp.activities.BaseListActivity;
 import uk.co.alt236.resourcemirrorsampleapp.util.GenericAdapter;
 
 public class GenericCheckActivity extends BaseListActivity {
