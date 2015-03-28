@@ -9,7 +9,7 @@ It is using LRU caching to mitigate the reflection time overhead.
 
 It also includes a few convenience functions to help change Drawable colour based on a hex colour value.
 
-So, in essence, this is a suped up version of [https://github.com/alt236/Reflective-Drawable-Loader---Android]() that deals woth all Resource types instead of just Drawables.
+So, in essence, this is a suped up version of [https://github.com/alt236/Reflective-Drawable-Loader---Android]() that deals with all Resource types instead of just Drawables.
 
 Installation
 -----------
@@ -79,7 +79,7 @@ Of course, nothing stops you from calling  `optDrawableId("yellow_submarine", nu
 
 Helper methods for Drawables
 -----------
-In addition to the normal methods above, there are a number of helper methods for drawables
+In addition to the normal methods above, there are a number of helper methods for drawables.
 
 <b>Convenience Functions and Drawable naming conventions</b>
 
@@ -113,7 +113,7 @@ ProGuard users must ensure that the R class, its inner drawable class and all fi
 
 Changelog
 -----------
-* v1.0.0 First public release
+* v0.0.1 First public release
 
 Permission Explanation
 -----------
