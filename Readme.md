@@ -3,7 +3,7 @@ Resource Mirror
 
 Were you ever in a situation where you had to access Drawables (or any other Resource) based on their names (for example if the names are stored in a DB) and you had to write long lookup tables converting the names into R.XXXX.ids? And maintaining them?
 
-This library is offering a way around it by using reflection to access the Resource directly by name. You only need to include them as normal into your Res folder tree. It has been benchmarked at up to 5x faster than the platform's `Resources.getIdentifier()` method.
+This library is offering a way around it by using reflection to access the Resource directly by name. You only need to include them as normal into your Res folder tree.
 
 It is using LRU caching to mitigate the reflection time overhead.
 
@@ -13,11 +13,7 @@ So, in essence, this is a suped up version of [https://github.com/alt236/Reflect
 
 Installation
 -----------
-To use:
-
-1. Download a copy of the ReflectiveDrawableLoader library and reference it in your project.
-2. Get an Instance of the ReflectiveDrawableLoader by calling `ReflectiveDrawableLoader.getInstance(Context);`
-3. Start getting your Drawable ids by calling  any of the getDrawable functions.
+TODO
 
 Usage
 -----------
