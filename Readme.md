@@ -9,6 +9,8 @@ It is using LRU caching to mitigate the reflection time overhead.
 
 It also includes a few convenience functions to help change Drawable colour based on a hex colour value.
 
+So, in essence, this is a suped up version of [https://github.com/alt236/Reflective-Drawable-Loader---Android]() that deals woth all Resource types instead of just Drawables.
+
 Installation
 -----------
 To use:
@@ -31,9 +33,9 @@ where `XXX` is the reource type (String, Drawable, Layout, etc.)
 The difference between the two calls are as follows:
 
 |Method|Effect|
-|---|---|
-|`getXXX()`|will throw a `android.content.res.Resources.NotFoundException` if the resource is missing|
-|`optXXX()`|will return the fallaback resource passed as a parameter if the resource is missing|
+|------|------|
+|`getXXXId()`|will throw a `android.content.res.Resources.NotFoundException` if the resource is missing|
+|`optXXXId()`|will return the fallback resource passed as a parameter if the resource is missing|
 
 <b>Accessing a different package</b>
 
@@ -42,7 +44,7 @@ You can access the resources of a different package by calling
 `Mirror.of("packageNameBeforeR");`
 
 for example:
-`Mirror.of("android")` will give you access to the `android.R.*` Resources
+`Mirror.of("android")` will give you access to the `android.R.*` Resources.
 
 <b>Additional Methods</b>
 
@@ -63,13 +65,10 @@ Simply call:
 
 Note that this will not add the found resources to the LRU cache
 
-Helper methods for Drawables
+Resource families
 -----------
-In addition to the normal methods above, there are a number of helper methods for drawables
 
-<b>Drawable families</b>
-
-The library is using a concept of icon families to distinguish between different variations of similar icons.
+The library is using a concept of resource families to distinguish between different variations of similar resoueces (of the same type).
 For example, icons in Android can come in a Holo Light and Holo Dark variant.
 
 So, if you call `optDrawableId("submarine", "yellow", R.drawable.ic_list_fallback)` then the library will try to look for an icon called `yellow_submarine` and return its Id if it exists, or `R.drawable.ic_list_fallback` otherwise.
@@ -77,6 +76,10 @@ So, if you call `optDrawableId("submarine", "yellow", R.drawable.ic_list_fallbac
 Similarly, if you call `optDrawableId("submarine", null, R.drawable.ic_list_fallback)` or  `getDrawableId("submarine", R.drawable.ic_list_fallback)` then the library will try to look for an icon called `submarine` and return its Id if it exists, or `R.drawable.ic_list_fallback` otherwise.
 
 Of course, nothing stops you from calling  `optDrawableId("yellow_submarine", null, R.drawable.ic_list_fallback)` to get the `yellow_submarine` icon as well.
+
+Helper methods for Drawables
+-----------
+In addition to the normal methods above, there are a number of helper methods for drawables
 
 <b>Convenience Functions and Drawable naming conventions</b>
 

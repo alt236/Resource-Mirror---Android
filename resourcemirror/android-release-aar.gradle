@@ -56,6 +56,7 @@ task zipRelease(type: Zip) {
 }
 
 task generateRelease << {
+    println "------------------------"
     println "Release ${version} can be found at ${localReleaseDest}/"
     println "Release ${version} zipped can be found ${buildDir}/release-${version}.zip"
 }

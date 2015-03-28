@@ -17,8 +17,8 @@
 apply plugin: 'com.android.library'
 
 ext {
-    PUBLISH_GROUP_ID = 'com.blundell'
-    PUBLISH_ARTIFACT_ID = 'resource-mirror-android-library'
+    PUBLISH_GROUP_ID = 'uk.co.alt236'
+    PUBLISH_ARTIFACT_ID = 'resource-mirror-android'
     PUBLISH_VERSION = '0.0.1'
 }
 
@@ -40,7 +40,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:21.0.3'
 }
 
 apply from: 'android-release-aar.gradle'
