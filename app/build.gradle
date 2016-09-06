@@ -17,13 +17,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 24
     buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "uk.co.alt236.resourcemirrorsampleapp"
         minSdkVersion 14
-        targetSdkVersion 21
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
