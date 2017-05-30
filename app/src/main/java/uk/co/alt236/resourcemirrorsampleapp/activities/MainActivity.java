@@ -17,7 +17,7 @@ package uk.co.alt236.resourcemirrorsampleapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,8 +28,10 @@ import android.widget.Toast;
 
 import uk.co.alt236.resourcemirrorsampleapp.R;
 
-public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     public static final String EXTRA_PACKAGE_NAME = "EXTRA_PACKAGE_NAME";
+
+    private static final int LAYOUT_ID = R.layout.activity_main;
     private static final String[] PACKAGES = {
             "Context",
             "android",
@@ -39,16 +41,20 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(LAYOUT_ID);
         final ListView listView = (ListView) findViewById(android.R.id.list);
-        final ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, PACKAGES);
+        final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, PACKAGES);
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(final AdapterView<?> parent,
+                            final View view,
+                            final int position,
+                            final long id) {
+
         final String label = ((TextView) view.findViewById(android.R.id.text1)).getText().toString();
         final Intent intent;
         final Bundle bundle = new Bundle();

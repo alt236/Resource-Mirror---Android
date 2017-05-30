@@ -27,11 +27,12 @@ import uk.co.alt236.resourcemirrorsampleapp.activities.BaseListActivity;
 import uk.co.alt236.resourcemirrorsampleapp.util.DrawableAdapter;
 
 public class DrawableCheckActivity extends BaseListActivity {
+    private static final int LAYOUT_ID = R.layout.activity_generic_list;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_generic_list);
+        setContentView(LAYOUT_ID);
         getListView().setBackgroundColor(Color.parseColor("#c0c0c0"));
 
         final List<String> resourceList = geMirror().get(getResourceType()).getResourceList();
