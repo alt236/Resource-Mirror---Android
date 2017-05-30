@@ -33,22 +33,20 @@ import uk.co.alt236.resourcemirrorsampleapp.R;
 import uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.DrawableCheckActivity;
 import uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.GenericCheckActivity;
 
-/**
- * Created by alex on 25/03/15.
- */
 public class ResourceListActivity extends BaseListActivity implements AdapterView.OnItemClickListener {
     public static final String EXTRA_RESOURCE_NAME = "EXTRA_RESOURCE_NAME";
+    private static final int LAYOUT_ID = R.layout.activity_main;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(LAYOUT_ID);
 
         final List<String> resources = geMirror().getResourceTypes();
 
         Collections.sort(resources);
 
-        final ListAdapter adapter = new ArrayAdapter<String>(
+        final ListAdapter adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
@@ -59,7 +57,11 @@ public class ResourceListActivity extends BaseListActivity implements AdapterVie
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(final AdapterView<?> parent,
+                            final View view,
+                            final int position,
+                            final long id) {
+
         final String resourceName = ((TextView) view.findViewById(android.R.id.text1)).getText().toString();
         final Intent intent;
         final Bundle bundle = new Bundle();

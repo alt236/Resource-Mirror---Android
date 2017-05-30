@@ -26,12 +26,12 @@ import uk.co.alt236.resourcemirrorsampleapp.activities.BaseListActivity;
 import uk.co.alt236.resourcemirrorsampleapp.util.GenericAdapter;
 
 public class GenericCheckActivity extends BaseListActivity {
-
+    private static final int LAYOUT_ID = R.layout.activity_generic_list;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_generic_list);
+        setContentView(LAYOUT_ID);
 
         final List<String> resourceList = geMirror().get(getResourceType()).getResourceList();
         final ListAdapter adapter = new GenericAdapter(

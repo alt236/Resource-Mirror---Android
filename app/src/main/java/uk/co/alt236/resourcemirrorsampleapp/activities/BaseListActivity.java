@@ -17,7 +17,7 @@
 package uk.co.alt236.resourcemirrorsampleapp.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -25,7 +25,7 @@ import android.widget.ListView;
 import uk.co.alt236.resourcemirror.reflectors.Mirror;
 import uk.co.alt236.resourcemirror.util.ResourceType;
 
-public abstract class BaseListActivity extends ActionBarActivity {
+public abstract class BaseListActivity extends AppCompatActivity {
     private ResourceType mResourceType;
     private ListView mListView;
 
