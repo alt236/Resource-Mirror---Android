@@ -21,9 +21,9 @@ import android.util.Log;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import uk.co.alt236.resourcemirror.ResourceType;
 import uk.co.alt236.resourcemirror.containers.DrawableResourceContainer;
 import uk.co.alt236.resourcemirror.reflectors.base.AbstractResourceReflector;
-import uk.co.alt236.resourcemirror.util.ResourceType;
 
 public final class DrawableReflector extends AbstractResourceReflector {
     public static final String ICON_PREFIX_BASE = "ic_";
@@ -34,15 +34,8 @@ public final class DrawableReflector extends AbstractResourceReflector {
     public static final String ICON_PREFIX_DIALOG = ICON_PREFIX_BASE + "dialog_";
     public static final String ICON_PREFIX_LIST = ICON_PREFIX_BASE + "list_";
     private static final ResourceType RESOURCE_TYPE = ResourceType.DRAWABLE;
-    private final String TAG = getClass().getName();
+    private final String TAG = getClass().getSimpleName();
     private final AtomicBoolean mAddDrawableNameToContainer;
-
-    private DrawableReflector() {
-        // We should never be here...
-        super(null);
-        Log.e(TAG, THE_DEFAULT_CONSTRUCTOR_WAS_CALLED);
-        throw new IllegalStateException(THE_DEFAULT_CONSTRUCTOR_WAS_CALLED);
-    }
 
     protected DrawableReflector(final String packageName) {
         super(packageName);

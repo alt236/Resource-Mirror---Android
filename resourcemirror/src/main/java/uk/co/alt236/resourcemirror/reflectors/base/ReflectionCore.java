@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.co.alt236.resourcemirror.util;
+package uk.co.alt236.resourcemirror.reflectors.base;
 
 import android.util.Log;
 
@@ -25,15 +25,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ReflectionUtils {
-    private final String TAG = getClass().getName();
+import uk.co.alt236.resourcemirror.ResourceType;
+
+/*package*/ class ReflectionCore {
+    private final String TAG = getClass().getSimpleName();
     private final String mPackageName;
     private final Map<String, Class<?>> mClassCache;
 
-    public ReflectionUtils(final String appPackageName) {
-        Log.d(TAG, "New ReflectionUtils() for '" + appPackageName + "'");
+    public ReflectionCore(final String appPackageName) {
         mPackageName = appPackageName;
-        mClassCache = new HashMap<String, Class<?>>();
+        mClassCache = new HashMap<>();
     }
 
     private Class<?> getResourceClass(final String suffix) {
@@ -61,9 +62,8 @@ public class ReflectionUtils {
         }
     }
 
-
     public List<String> getResourceList(final ResourceType type) {
-        final List<String> list = new ArrayList<String>();
+        final List<String> list = new ArrayList<>();
         final Class<?> resourceClass = getResourceClass(getResourceLocation(type));
 
         if (resourceClass != null) {
@@ -71,7 +71,9 @@ public class ReflectionUtils {
 
             for (final Field field : resourceArray) {
                 try {
-                    list.add(field.getName());
+                    if (int.class.equals(field.getType())) {
+                        list.add(field.getName());
+                    }
                 } catch (final IllegalArgumentException e) {
                     Log.e(TAG, "getResourceList() Error: " + e.getMessage(), e);
                 }
@@ -83,13 +85,16 @@ public class ReflectionUtils {
     }
 
     public List<String> getResourceTypes() {
-        final List<String> list = new ArrayList<String>();
+        final String baseClass = mPackageName + ".R";
+        final List<String> list = new ArrayList<>();
 
+        Log.d(TAG, "getResourceClass() Getting for '" + baseClass + "' ============= ");
         try {
-            final Class<?> rClassBase = Class.forName(mPackageName + ".R");
+            final Class<?> rClassBase = Class.forName(baseClass);
             final Class<?>[] subClassTable = rClassBase.getDeclaredClasses();
 
             for (final Class<?> subClass : subClassTable) {
+                Log.d(TAG, "getResourceClass() Name: " + subClass.getName());
                 list.add(subClass.getSimpleName());
             }
 
@@ -116,26 +121,10 @@ public class ReflectionUtils {
         }
     }
 
-    public void logSubClasses(final String baseClass) {
-        Log.d(TAG, "logSubClasses() Getting subclasses for '" + baseClass + "' ============= ");
-
-        try {
-            final Class<?> rClass = Class.forName(baseClass);
-            final Class<?>[] subClassTable = rClass.getDeclaredClasses();
-
-            for (final Class<?> subclass : subClassTable) {
-                Log.d(TAG, "logSubClasses() Class: " + subclass.getCanonicalName());
-            }
-
-        } catch (final Exception e) {
-            Log.e(TAG, "logSubClasses() Error: " + e.getMessage(), e);
-        }
-    }
-
     public int reflectResource(final ResourceType type, final String fieldName, final int defaultValue, final boolean reportFailure) {
         final String resourceLocation = getResourceLocation(type);
 
-        int error;
+        final int error;
         try {
             final Field field = getResourceClass(resourceLocation).getField(fieldName);
             if (field.getType().equals(int.class)) {

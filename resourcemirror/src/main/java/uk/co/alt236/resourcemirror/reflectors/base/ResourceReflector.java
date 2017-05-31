@@ -18,7 +18,7 @@ package uk.co.alt236.resourcemirror.reflectors.base;
 
 import java.util.List;
 
-import uk.co.alt236.resourcemirror.util.ResourceType;
+import uk.co.alt236.resourcemirror.ResourceType;
 
 public interface ResourceReflector {
 
@@ -29,7 +29,7 @@ public interface ResourceReflector {
      * @return The id of the Resource corresponding to the passed parameters.
      * @throws android.content.res.Resources.NotFoundException if the requested resource was not found.
      */
-    public int getResourceId(String resourceName);
+    int getResourceId(String resourceName);
 
     /**
      * Attempts to retrieve the Id of the requested Resource.
@@ -39,11 +39,11 @@ public interface ResourceReflector {
      * @return The id of the Resource corresponding to the passed parameters.
      * @throws android.content.res.Resources.NotFoundException if the requested resource was not found.
      */
-    public int getResourceId(String resourceName, String family);
+    int getResourceId(String resourceName, String family);
 
-    public List<String> getResourceList();
+    List<String> getResourceList();
 
-    public ResourceType getResourceType();
+    ResourceType getResourceType();
 
     /**
      * Attempts to retrieve the Id of the requested Resource.
@@ -53,7 +53,7 @@ public interface ResourceReflector {
      *                           It has to be of the same type as the requested Resource
      * @return The id of the Resource corresponding to the passed parameters.
      */
-    public int optResourceId(String resourceName, int fallbackResourceId);
+    int optResourceId(String resourceName, int fallbackResourceId);
 
     /**
      * Attempts to retrieve the Id of the requested Resource.
@@ -64,5 +64,5 @@ public interface ResourceReflector {
      *                           It has to be of the same type as the requested Resource
      * @return The id of the Resource corresponding to the passed parameters.
      */
-    public int optResourceId(String resourceName, String family, int fallbackResourceId);
+    int optResourceId(String resourceName, String family, int fallbackResourceId);
 }

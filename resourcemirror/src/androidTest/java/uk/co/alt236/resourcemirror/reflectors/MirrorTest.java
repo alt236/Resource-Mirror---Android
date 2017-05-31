@@ -18,8 +18,9 @@ package uk.co.alt236.resourcemirror.reflectors;
 
 import android.test.AndroidTestCase;
 
+import uk.co.alt236.resourcemirror.Mirror;
+import uk.co.alt236.resourcemirror.ResourceType;
 import uk.co.alt236.resourcemirror.reflectors.base.ResourceReflector;
-import uk.co.alt236.resourcemirror.util.ResourceType;
 
 public class MirrorTest extends AndroidTestCase {
 

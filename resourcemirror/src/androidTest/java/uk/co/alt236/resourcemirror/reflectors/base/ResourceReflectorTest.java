@@ -19,8 +19,8 @@ package uk.co.alt236.resourcemirror.reflectors.base;
 import android.content.res.Resources;
 import android.test.AndroidTestCase;
 
-import uk.co.alt236.resourcemirror.reflectors.Mirror;
-import uk.co.alt236.resourcemirror.util.ResourceType;
+import uk.co.alt236.resourcemirror.Mirror;
+import uk.co.alt236.resourcemirror.ResourceType;
 
 public class ResourceReflectorTest extends AndroidTestCase {
     private static final String NON_EXISTING_RESOURCE = "!THIS_CANNOT_BE!";
