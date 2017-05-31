@@ -24,27 +24,21 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import uk.co.alt236.resourcemirror.containers.LruLinkedHashMap;
-import uk.co.alt236.resourcemirror.util.ReflectionUtils;
 
 public abstract class AbstractResourceReflector implements ResourceReflector {
-    protected static final String THE_DEFAULT_CONSTRUCTOR_WAS_CALLED = "The default Constructor was called! This should never happen...";
     private static final boolean TIME_LOGGING_ENABLED = false;
     private static final int CACHE_SIZE = 100;
     protected final ResourceKeyFormatter mKeyFormatter;
     private final AtomicBoolean mLogErrors;
-    private final ReflectionUtils mReflectionUtils;
+    private final ReflectionCore mReflectionCore;
     private final Map<String, Integer> mCache;
     private final Map<String, Object> mCacheMisses;
 
     protected AbstractResourceReflector(final String packageName) {
-        if (packageName == null) {
-            mReflectionUtils = null;
-        } else {
-            mReflectionUtils = new ReflectionUtils(packageName);
-        }
+        mReflectionCore = new ReflectionCore(packageName);
         mKeyFormatter = new ResourceKeyFormatter();
-        mCache = new LruLinkedHashMap<String, Integer>(CACHE_SIZE, 0.75f);
-        mCacheMisses = new LruLinkedHashMap<String, Object>(CACHE_SIZE, 0.75f);
+        mCache = new LruLinkedHashMap<>(CACHE_SIZE, 0.75f);
+        mCacheMisses = new LruLinkedHashMap<>(CACHE_SIZE, 0.75f);
         mLogErrors = new AtomicBoolean(false);
     }
 
@@ -58,11 +52,7 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
 
     private synchronized int fetchResourceId(final String resourceName, final int fallbackResourceId) {
         Integer result;
-        final long startTime;
-
-        if (TIME_LOGGING_ENABLED) {
-            startTime = System.nanoTime();
-        }
+        final long startTime = System.nanoTime();
 
         // Check if its in the known "cache miss" list
         if (isKeyInMisses(resourceName)) {
@@ -71,7 +61,7 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
             result = getFromCache(resourceName);
 
             if (result == null) {
-                result = getReflectionUtils().reflectResource(
+                result = getReflectionCore().reflectResource(
                         getResourceType(),
                         resourceName,
                         fallbackResourceId,
@@ -95,7 +85,7 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
     }
 
     public List<String> getAllResourceTypes() {
-        return mReflectionUtils.getResourceTypes();
+        return mReflectionCore.getResourceTypes();
     }
 
     protected Integer getFromCache(final String key) {
@@ -104,8 +94,8 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
 
     protected abstract String getLogTag();
 
-    protected ReflectionUtils getReflectionUtils() {
-        return mReflectionUtils;
+    protected ReflectionCore getReflectionCore() {
+        return mReflectionCore;
     }
 
     @Override
@@ -125,7 +115,7 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
 
     @Override
     public List<String> getResourceList() {
-        return mReflectionUtils.getResourceList(getResourceType());
+        return mReflectionCore.getResourceList(getResourceType());
     }
 
     public boolean isErrorLoggingEnabled() {
@@ -151,7 +141,7 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
      * this library can see into logcat Only useful for debugging.
      */
     public void printResourcesToLogCat() {
-        getReflectionUtils().logFields(getResourceType());
+        getReflectionCore().logFields(getResourceType());
     }
 
     /**

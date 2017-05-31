@@ -1,126 +1,104 @@
-/*
- * Copyright 2015 Alexandros Schillings
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package uk.co.alt236.resourcemirror.reflectors;
-
-import android.content.Context;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import uk.co.alt236.resourcemirror.ResourceType;
 import uk.co.alt236.resourcemirror.reflectors.base.AbstractResourceReflector;
 import uk.co.alt236.resourcemirror.reflectors.base.ResourceReflector;
-import uk.co.alt236.resourcemirror.util.ResourceType;
 
-public class Mirror {
-    private static final Object MAP_LOCK = new Object();
-    private static final Map<String, Mirror> MAP_OF_MIRRORS = new HashMap<String, Mirror>();
-
+public class ReflectorFactory {
     private final Object mResourceLoaderCreationLock = new Object();
-
     private final Map<ResourceType, AbstractResourceReflector> mResourceLoaders;
     private final String mPackageName;
 
-    private Mirror(final String packageName) {
+    public ReflectorFactory(final String packageName) {
         mPackageName = packageName;
-        mResourceLoaders = new HashMap<ResourceType, AbstractResourceReflector>();
+        mResourceLoaders = new HashMap<>();
     }
 
     /**
-     * Gets the appropriate Resource loader for the requested {@link uk.co.alt236.resourcemirror.util.ResourceType};
+     * Gets the appropriate Resource loader for the requested {@link ResourceType};
      *
-     * @param resource the {@link uk.co.alt236.resourcemirror.util.ResourceType} needed.
+     * @param resource the {@link ResourceType} needed.
      * @return the {@link uk.co.alt236.resourcemirror.reflectors.base.ResourceReflector} requested
-     * @throws java.lang.IllegalArgumentException if an unknown or null {@link uk.co.alt236.resourcemirror.util.ResourceType} is requested.
+     * @throws java.lang.IllegalArgumentException if an unknown or null {@link ResourceType} is requested.
      */
     public ResourceReflector get(final ResourceType resource) {
-        final ResourceReflector methodResult;
+        final ResourceReflector retVal;
         if (resource == null) {
             throw new IllegalArgumentException("Cannot have null as a resource type...");
         } else {
             switch (resource) {
                 case ANIM:
-                    methodResult = getAnimations();
+                    retVal = getAnimations();
                     break;
                 case ANIMATOR:
-                    methodResult = getAnimators();
+                    retVal = getAnimators();
                     break;
                 case ARRAY:
-                    methodResult = getArrays();
+                    retVal = getArrays();
                     break;
                 case ATTR:
-                    methodResult = getAttrs();
+                    retVal = getAttrs();
                     break;
                 case BOOL:
-                    methodResult = getBooleans();
+                    retVal = getBooleans();
                     break;
                 case COLOR:
-                    methodResult = getColors();
+                    retVal = getColors();
                     break;
                 case DIMEN:
-                    methodResult = getDimens();
+                    retVal = getDimens();
                     break;
                 case DRAWABLE:
-                    methodResult = getDrawables();
+                    retVal = getDrawables();
                     break;
                 case FRACTION:
-                    methodResult = getFractions();
+                    retVal = getFractions();
                     break;
                 case ID:
-                    methodResult = getIds();
+                    retVal = getIds();
                     break;
                 case INTEGER:
-                    methodResult = getIntegers();
+                    retVal = getIntegers();
                     break;
                 case INTERPOLATOR:
-                    methodResult = getInterpolators();
+                    retVal = getInterpolators();
                     break;
                 case LAYOUT:
-                    methodResult = getLayouts();
+                    retVal = getLayouts();
                     break;
                 case MENU:
-                    methodResult = getMenus();
+                    retVal = getMenus();
                     break;
                 case MIPMAP:
-                    methodResult = getMipMaps();
+                    retVal = getMipMaps();
                     break;
                 case PLURALS:
-                    methodResult = getPlurals();
+                    retVal = getPlurals();
                     break;
                 case RAW:
-                    methodResult = getRaws();
+                    retVal = getRaws();
                     break;
                 case STRING:
-                    methodResult = getStrings();
+                    retVal = getStrings();
                     break;
                 case STYLEABLE:
-                    methodResult = getStyleables();
+                    retVal = getStyleables();
                     break;
                 case STYLE:
-                    methodResult = getStyles();
+                    retVal = getStyles();
                     break;
                 case XML:
-                    methodResult = getXmls();
+                    retVal = getXmls();
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown resource type '" + resource + "'");
             }
         }
-        return methodResult;
+        return retVal;
     }
 
     public AnimationReflector getAnimations() {
@@ -445,43 +423,5 @@ public class Mirror {
         }
 
         return (XmlReflector) methodResult;
-    }
-
-    public static void clear() {
-        synchronized (MAP_LOCK) {
-            MAP_OF_MIRRORS.clear();
-        }
-    }
-
-    public static int getNumberOfMirrors() {
-        synchronized (MAP_LOCK) {
-            return MAP_OF_MIRRORS.size();
-        }
-    }
-
-    /**
-     * Returns an instance of the {@link uk.co.alt236.resourcemirror.reflectors.Mirror}
-     *
-     * @param context A standard Android context. It cannot be null
-     * @return The instance of the {@link uk.co.alt236.resourcemirror.reflectors.Mirror}
-     */
-    public static Mirror of(final Context context) {
-        return of(context.getApplicationContext().getPackageName());
-    }
-
-    /**
-     * Returns an instance of the {@link uk.co.alt236.resourcemirror.reflectors.Mirror}
-     *
-     * @param packageName The package name to try and reflect off.
-     * @return The instance of the {@link uk.co.alt236.resourcemirror.reflectors.Mirror}
-     */
-    public static Mirror of(final String packageName) {
-        synchronized (MAP_LOCK) {
-            if (!MAP_OF_MIRRORS.containsKey(packageName)) {
-                MAP_OF_MIRRORS.put(packageName, new Mirror(packageName));
-            }
-        }
-
-        return MAP_OF_MIRRORS.get(packageName);
     }
 }

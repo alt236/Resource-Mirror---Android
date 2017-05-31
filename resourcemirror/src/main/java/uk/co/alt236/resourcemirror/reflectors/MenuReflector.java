@@ -17,22 +17,12 @@
 package uk.co.alt236.resourcemirror.reflectors;
 
 
-import android.util.Log;
-
+import uk.co.alt236.resourcemirror.ResourceType;
 import uk.co.alt236.resourcemirror.reflectors.base.AbstractResourceReflector;
-import uk.co.alt236.resourcemirror.util.ResourceType;
 
 public final class MenuReflector extends AbstractResourceReflector {
     private static final ResourceType RESOURCE_TYPE = ResourceType.MENU;
-    private final String TAG = getClass().getName();
-
-    private MenuReflector() {
-        // We should never be here...
-        super(null);
-        Log.e(TAG, THE_DEFAULT_CONSTRUCTOR_WAS_CALLED);
-        throw new IllegalStateException(THE_DEFAULT_CONSTRUCTOR_WAS_CALLED);
-
-    }
+    private final String TAG = getClass().getSimpleName();
 
     protected MenuReflector(final String packageName) {
         super(packageName);

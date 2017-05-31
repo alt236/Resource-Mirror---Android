@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.co.alt236.resourcemirror.util;
+package uk.co.alt236.resourcemirror;
 
 public enum ResourceType {
     ANIM("anim"),

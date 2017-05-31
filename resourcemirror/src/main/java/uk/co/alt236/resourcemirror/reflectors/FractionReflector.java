@@ -16,22 +16,12 @@
 
 package uk.co.alt236.resourcemirror.reflectors;
 
-import android.util.Log;
-
+import uk.co.alt236.resourcemirror.ResourceType;
 import uk.co.alt236.resourcemirror.reflectors.base.AbstractResourceReflector;
-import uk.co.alt236.resourcemirror.util.ResourceType;
 
 public final class FractionReflector extends AbstractResourceReflector {
     private static final ResourceType RESOURCE_TYPE = ResourceType.FRACTION;
-    private final String TAG = getClass().getName();
-
-    private FractionReflector() {
-        // We should never be here...
-        super(null);
-        Log.e(TAG, THE_DEFAULT_CONSTRUCTOR_WAS_CALLED);
-        throw new IllegalStateException(THE_DEFAULT_CONSTRUCTOR_WAS_CALLED);
-
-    }
+    private final String TAG = getClass().getSimpleName();
 
     protected FractionReflector(final String packageName) {
         super(packageName);
