@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
-import uk.co.alt236.resourcemirror.Mirror;
 import uk.co.alt236.resourcemirrorsampleapp.activities.common.CommonExtras;
 
 public final class ResourceTypesActivityIntentFactory {
@@ -37,25 +36,9 @@ public final class ResourceTypesActivityIntentFactory {
         final Bundle bundle = new Bundle();
         bundle.putString(
                 CommonExtras.EXTRA_PACKAGE_NAME,
-                getPackageName(context, packageName));
+                packageName);
         intent.putExtras(bundle);
 
         return intent;
-    }
-
-    private static String getPackageName(final Context context,
-                                         final String packageName) {
-
-        final String retVal;
-
-        // Ok, if the text contains a '.' it is a package name
-        // Else, it means the default context...
-        if (packageName.indexOf('.') == -1) {
-            retVal = Mirror.getPackageName(context);
-        } else {
-            retVal = packageName;
-        }
-
-        return retVal;
     }
 }
