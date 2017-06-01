@@ -19,4 +19,8 @@
 
     <string name="button_randomise">Randomise!</string>
     <string name="button_colorise">Colorise!</string>
+    <string name="resource_not_found">Resource not found</string>
+
+    <string name="prefix_resid">ResId: %s</string>
+    <string name="prefix_value">Value: %s</string>
 </resources>

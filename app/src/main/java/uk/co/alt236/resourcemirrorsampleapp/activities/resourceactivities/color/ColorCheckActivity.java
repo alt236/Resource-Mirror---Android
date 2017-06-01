@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities;
+package uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.color;
 
 import android.os.Bundle;
 import android.widget.ListAdapter;
@@ -22,10 +22,9 @@ import android.widget.ListAdapter;
 import java.util.List;
 
 import uk.co.alt236.resourcemirrorsampleapp.R;
-import uk.co.alt236.resourcemirrorsampleapp.activities.BaseListActivity;
-import uk.co.alt236.resourcemirrorsampleapp.util.GenericAdapter;
+import uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.common.ResourceListActivity;
 
-public class GenericCheckActivity extends BaseListActivity {
+public class ColorCheckActivity extends ResourceListActivity {
     private static final int LAYOUT_ID = R.layout.activity_generic_list;
 
     @Override
@@ -33,13 +32,8 @@ public class GenericCheckActivity extends BaseListActivity {
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT_ID);
 
-        final List<String> resourceList = geMirror().get(getResourceType()).getResourceList();
-        final ListAdapter adapter = new GenericAdapter(
-                this,
-                geMirror(),
-                getResourceType(),
-                resourceList);
-
-        setListAdapter(adapter);
+        final List<String> resourceList = getMirror().get(getResourceType()).getResourceList();
+        final ListAdapter adapter = new ColorAdapter(this, getMirror(), resourceList);
+        getListView().setAdapter(adapter);
     }
 }

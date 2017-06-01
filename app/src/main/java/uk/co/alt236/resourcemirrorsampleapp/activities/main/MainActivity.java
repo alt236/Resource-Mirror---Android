@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package uk.co.alt236.resourcemirrorsampleapp.activities;
+package uk.co.alt236.resourcemirrorsampleapp.activities.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,13 +25,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import uk.co.alt236.resourcemirrorsampleapp.R;
+import uk.co.alt236.resourcemirrorsampleapp.activities.resourcetypes.ResourceTypesActivityIntentFactory;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    public static final String EXTRA_PACKAGE_NAME = "EXTRA_PACKAGE_NAME";
-
     private static final int LAYOUT_ID = R.layout.activity_main;
     private static final String[] PACKAGES = {
             "Context",
@@ -56,30 +55,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             final long id) {
 
         final String label = ((TextView) view.findViewById(android.R.id.text1)).getText().toString();
-        final Intent intent;
-        final Bundle bundle = new Bundle();
-
-        if (label == null) {
-            intent = null;
-        } else {
-            intent = new Intent(this, ResourceListActivity.class);
-        }
-
-        if (intent == null) {
-            Toast.makeText(this, "Intent not setup for " + label, Toast.LENGTH_SHORT).show();
-        } else {
-            // Ok, if the text contains a '.' it is a package name
-            // Else, it means the default context...
-            final String packageName;
-            if(label.indexOf('.') == -1){
-                packageName = null;
-            } else {
-                packageName = label;
-            }
-
-            bundle.putString(EXTRA_PACKAGE_NAME, packageName);
-            intent.putExtras(bundle);
-            startActivity(intent);
-        }
+        final Intent intent = ResourceTypesActivityIntentFactory.create(this, label);
+        ActivityCompat.startActivity(this, intent, null);
     }
 }

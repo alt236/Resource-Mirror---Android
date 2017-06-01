@@ -14,27 +14,30 @@
  * limitations under the License.
  */
 
-package uk.co.alt236.resourcemirrorsampleapp.activities;
+package uk.co.alt236.resourcemirrorsampleapp.activities.common;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
+import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import uk.co.alt236.resourcemirror.reflectors.Mirror;
-import uk.co.alt236.resourcemirror.util.ResourceType;
+import uk.co.alt236.resourcemirror.Mirror;
 
 public abstract class BaseListActivity extends AppCompatActivity {
-    private ResourceType mResourceType;
+    private static final String TAG = BaseListActivity.class.getSimpleName();
+
     private ListView mListView;
 
-    protected Mirror geMirror() {
-        final String packageName = getIntent().getExtras().getString(MainActivity.EXTRA_PACKAGE_NAME, null);
+    protected Mirror getMirror() {
+        final String packageName = getIntent().getExtras().getString(CommonExtras.EXTRA_PACKAGE_NAME, null);
         if(packageName == null){
-            return Mirror.of(this);
+            throw new IllegalStateException("No package name passed. Did you forget to set " + CommonExtras.EXTRA_PACKAGE_NAME + "?");
         } else {
-            return Mirror.of(packageName);
+            final Mirror mirror = Mirror.of(packageName);
+            Log.d(TAG, "Asked for mirror for " + packageName + ", got: " + mirror.getPackageName());
+            return mirror;
         }
     }
 
@@ -42,19 +45,10 @@ public abstract class BaseListActivity extends AppCompatActivity {
         return mListView;
     }
 
-    protected ResourceType getResourceType() {
-        return mResourceType;
-    }
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        final Bundle b = getIntent().getExtras();
-        if (b != null && !TextUtils.isEmpty(b.getString(ResourceListActivity.EXTRA_RESOURCE_NAME))) {
-            mResourceType = ResourceType.fromString(b.getString(ResourceListActivity.EXTRA_RESOURCE_NAME));
-            setTitle(mResourceType.getResourceName());
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -65,5 +59,16 @@ public abstract class BaseListActivity extends AppCompatActivity {
 
     public void setListAdapter(final ListAdapter adapter){
         getListView().setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
