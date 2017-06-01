@@ -19,8 +19,10 @@ package uk.co.alt236.resourcemirror.reflectors.base;
 import android.content.res.Resources;
 import android.util.Log;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import uk.co.alt236.resourcemirror.containers.LruLinkedHashMap;
@@ -32,13 +34,13 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
     private final AtomicBoolean mLogErrors;
     private final ReflectionCore mReflectionCore;
     private final Map<String, Integer> mCache;
-    private final Map<String, Object> mCacheMisses;
+    private final Set<String> mCacheMisses;
 
     protected AbstractResourceReflector(final String packageName) {
         mReflectionCore = new ReflectionCore(packageName);
         mKeyFormatter = new ResourceKeyFormatter();
         mCache = new LruLinkedHashMap<>(CACHE_SIZE, 0.75f);
-        mCacheMisses = new LruLinkedHashMap<>(CACHE_SIZE, 0.75f);
+        mCacheMisses = new HashSet<>(CACHE_SIZE, 0.75f);
         mLogErrors = new AtomicBoolean(false);
     }
 
@@ -46,16 +48,12 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
         mCache.put(key, value);
     }
 
-    private void addToMissCache(final String key, final Integer value) {
-        mCacheMisses.put(key, value);
-    }
-
     private synchronized int fetchResourceId(final String resourceName, final int fallbackResourceId) {
         Integer result;
         final long startTime = System.nanoTime();
 
         // Check if its in the known "cache miss" list
-        if (isKeyInMisses(resourceName)) {
+        if (mCacheMisses.contains(resourceName)) {
             result = fallbackResourceId;
         } else {
             result = getFromCache(resourceName);
@@ -67,11 +65,11 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
                         fallbackResourceId,
                         isErrorLoggingEnabled());
 
-                if (result != null && result != fallbackResourceId) {
+                if (result != fallbackResourceId) {
                     addToCache(resourceName, result);
                 } else {
                     // We do not have this drawable, add it in the "miss" cache.
-                    addToMissCache(resourceName, null);
+                    mCacheMisses.add(resourceName);
                 }
             }
         }
@@ -120,10 +118,6 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
 
     public boolean isErrorLoggingEnabled() {
         return mLogErrors.get();
-    }
-
-    private boolean isKeyInMisses(final String key) {
-        return mCacheMisses.containsKey(key);
     }
 
     @Override
