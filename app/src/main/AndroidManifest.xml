@@ -14,8 +14,8 @@
   ~ limitations under the License.
   -->
 
-<manifest package="uk.co.alt236.resourcemirrorsampleapp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="uk.co.alt236.resourcemirrorsampleapp">
 
     <application
         android:allowBackup="true"
@@ -23,16 +23,17 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <activity android:name="uk.co.alt236.resourcemirrorsampleapp.activities.MainActivity">
+        <activity android:name="uk.co.alt236.resourcemirrorsampleapp.activities.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.DrawableCheckActivity" />
-        <activity android:name="uk.co.alt236.resourcemirrorsampleapp.activities.resourceactivities.GenericCheckActivity" />
-        <activity android:name="uk.co.alt236.resourcemirrorsampleapp.activities.ResourceListActivity" />
+        <activity android:name=".activities.resourceactivities.color.ColorCheckActivity"/>
+        <activity android:name=".activities.resourceactivities.drawable.DrawableCheckActivity"/>
+        <activity android:name=".activities.resourceactivities.generic.GenericCheckActivity"/>
+        <activity android:name=".activities.resourceactivities.mipmap.MipmapCheckActivity"/>
+        <activity android:name=".activities.resourcetypes.ResourceTypesActivity"/>
 
     </application>
 
