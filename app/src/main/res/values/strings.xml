@@ -16,9 +16,6 @@
 
 <resources>
     <string name="app_name">Resource Mirror Sample App</string>
-
-    <string name="button_randomise">Randomise!</string>
-    <string name="button_colorise">Colorise!</string>
     <string name="resource_not_found">Resource not found</string>
 
     <string name="prefix_resid">ResId: %s</string>

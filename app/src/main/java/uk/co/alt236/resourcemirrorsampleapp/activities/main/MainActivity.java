@@ -26,23 +26,23 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import uk.co.alt236.resourcemirror.Mirror;
 import uk.co.alt236.resourcemirrorsampleapp.R;
 import uk.co.alt236.resourcemirrorsampleapp.activities.resourcetypes.ResourceTypesActivityIntentFactory;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private static final int LAYOUT_ID = R.layout.activity_main;
-    private static final String[] PACKAGES = {
-            "Context",
-            "android",
-            "android.support.v7.appcompat"
-    };
+
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT_ID);
         final ListView listView = (ListView) findViewById(android.R.id.list);
-        final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, PACKAGES);
+        final ListAdapter adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                createPackageArray());
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
@@ -57,5 +57,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         final String label = ((TextView) view.findViewById(android.R.id.text1)).getText().toString();
         final Intent intent = ResourceTypesActivityIntentFactory.create(this, label);
         ActivityCompat.startActivity(this, intent, null);
+    }
+
+    private String[] createPackageArray() {
+        return new String[]{
+                Mirror.getPackageName(this),
+                "android",
+                "android.support.v7.appcompat"};
     }
 }
