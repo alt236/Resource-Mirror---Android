@@ -16,6 +16,8 @@
 
 package uk.co.alt236.resourcemirror.reflectors;
 
+import android.support.annotation.NonNull;
+
 import uk.co.alt236.resourcemirror.ResourceType;
 import uk.co.alt236.resourcemirror.reflectors.base.AbstractResourceReflector;
 
@@ -28,11 +30,13 @@ public final class ArrayReflector extends AbstractResourceReflector {
         super(packageName);
     }
 
+    @NonNull
     @Override
     protected String getLogTag() {
         return TAG;
     }
 
+    @NonNull
     @Override
     public ResourceType getResourceType() {
         return RESOURCE_TYPE;

@@ -16,6 +16,9 @@
 
 package uk.co.alt236.resourcemirror.reflectors.base;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.util.List;
 
 import uk.co.alt236.resourcemirror.ResourceType;
@@ -29,7 +32,7 @@ public interface ResourceReflector {
      * @return The id of the Resource corresponding to the passed parameters.
      * @throws android.content.res.Resources.NotFoundException if the requested resource was not found.
      */
-    int getResourceId(String resourceName);
+    int getResourceId(@NonNull String resourceName);
 
     /**
      * Attempts to retrieve the Id of the requested Resource.
@@ -39,10 +42,12 @@ public interface ResourceReflector {
      * @return The id of the Resource corresponding to the passed parameters.
      * @throws android.content.res.Resources.NotFoundException if the requested resource was not found.
      */
-    int getResourceId(String resourceName, String family);
+    int getResourceId(@NonNull String resourceName, @Nullable String family);
 
+    @NonNull
     List<String> getResourceList();
 
+    @NonNull
     ResourceType getResourceType();
 
     /**
@@ -53,7 +58,7 @@ public interface ResourceReflector {
      *                           It has to be of the same type as the requested Resource
      * @return The id of the Resource corresponding to the passed parameters.
      */
-    int optResourceId(String resourceName, int fallbackResourceId);
+    int optResourceId(@NonNull String resourceName, int fallbackResourceId);
 
     /**
      * Attempts to retrieve the Id of the requested Resource.
@@ -64,5 +69,5 @@ public interface ResourceReflector {
      *                           It has to be of the same type as the requested Resource
      * @return The id of the Resource corresponding to the passed parameters.
      */
-    int optResourceId(String resourceName, String family, int fallbackResourceId);
+    int optResourceId(@NonNull String resourceName, @Nullable String family, int fallbackResourceId);
 }

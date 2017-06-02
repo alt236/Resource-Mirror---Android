@@ -16,6 +16,10 @@
 
 package uk.co.alt236.resourcemirror.reflectors;
 
+import android.support.annotation.InterpolatorRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import uk.co.alt236.resourcemirror.ResourceType;
 import uk.co.alt236.resourcemirror.reflectors.base.AbstractResourceReflector;
 
@@ -27,13 +31,42 @@ public final class InterpolatorReflector extends AbstractResourceReflector {
         super(packageName);
     }
 
+    @NonNull
     @Override
     protected String getLogTag() {
         return TAG;
     }
 
+    @NonNull
     @Override
     public ResourceType getResourceType() {
         return RESOURCE_TYPE;
+    }
+
+    @InterpolatorRes
+    @Override
+    public int getResourceId(@NonNull final String resourceName) {
+        return super.getResourceId(resourceName);
+    }
+
+    @InterpolatorRes
+    @Override
+    public int getResourceId(@NonNull final String resourceName, final String family) {
+        return super.getResourceId(resourceName, family);
+    }
+
+    @InterpolatorRes
+    @Override
+    public int optResourceId(@NonNull final String resourceName,
+                             @InterpolatorRes final int fallbackResourceId) {
+        return super.optResourceId(resourceName, fallbackResourceId);
+    }
+
+    @InterpolatorRes
+    @Override
+    public int optResourceId(@NonNull final String resourceName,
+                             @Nullable final String family,
+                             @InterpolatorRes final int fallbackResourceId) {
+        return super.optResourceId(resourceName, family, fallbackResourceId);
     }
 }

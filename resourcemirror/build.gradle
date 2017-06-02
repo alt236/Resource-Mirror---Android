@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    provided "com.android.support:support-annotations:${appCompatLibVersion}"
 }
 
-apply from: 'android-release-aar.gradle'
+//apply from: 'android-release-aar.gradle'

@@ -17,6 +17,8 @@
 package uk.co.alt236.resourcemirror.reflectors.base;
 
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.util.HashSet;
@@ -44,11 +46,13 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
         mLogErrors = new AtomicBoolean(false);
     }
 
-    private void addToCache(final String key, final Integer value) {
+    private void addToCache(@NonNull final String key,
+                            @NonNull final Integer value) {
         mCache.put(key, value);
     }
 
-    private synchronized int fetchResourceId(final String resourceName, final int fallbackResourceId) {
+    private synchronized int fetchResourceId(@NonNull final String resourceName,
+                                             final int fallbackResourceId) {
         Integer result;
         final long startTime = System.nanoTime();
 
@@ -82,14 +86,17 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
         return result;
     }
 
+    @NonNull
     public List<String> getAllResourceTypes() {
         return mReflectionCore.getResourceTypes();
     }
 
+    @Nullable
     protected Integer getFromCache(final String key) {
         return mCache.get(key);
     }
 
+    @NonNull
     protected abstract String getLogTag();
 
     protected ReflectionCore getReflectionCore() {
@@ -97,12 +104,12 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
     }
 
     @Override
-    public int getResourceId(final String resourceName) {
+    public int getResourceId(@NonNull final String resourceName) {
         return getResourceId(resourceName, null);
     }
 
     @Override
-    public int getResourceId(final String resourceName, final String family) {
+    public int getResourceId(@NonNull final String resourceName, final String family) {
         final int resourceId = optResourceId(resourceName, family, -1);
         if (resourceId == -1) {
             throw new Resources.NotFoundException(mKeyFormatter.formatKey(resourceName, family));
@@ -112,6 +119,7 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
     }
 
     @Override
+    @NonNull
     public List<String> getResourceList() {
         return mReflectionCore.getResourceList(getResourceType());
     }
@@ -121,12 +129,15 @@ public abstract class AbstractResourceReflector implements ResourceReflector {
     }
 
     @Override
-    public int optResourceId(final String resourceName, final int fallbackResourceId) {
+    public int optResourceId(@NonNull final String resourceName,
+                             final int fallbackResourceId) {
         return optResourceId(resourceName, null, fallbackResourceId);
     }
 
     @Override
-    public int optResourceId(final String resourceName, final String family, final int fallbackResourceId) {
+    public int optResourceId(@NonNull final String resourceName,
+                             @Nullable final String family,
+                             final int fallbackResourceId) {
         return fetchResourceId(mKeyFormatter.formatKey(resourceName, family), fallbackResourceId);
     }
 

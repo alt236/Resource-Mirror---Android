@@ -16,6 +16,10 @@
 
 package uk.co.alt236.resourcemirror.reflectors;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.StyleRes;
+
 import uk.co.alt236.resourcemirror.ResourceType;
 import uk.co.alt236.resourcemirror.reflectors.base.AbstractResourceReflector;
 
@@ -27,13 +31,42 @@ public final class StyleReflector extends AbstractResourceReflector {
         super(packageName);
     }
 
+    @NonNull
     @Override
     protected String getLogTag() {
         return TAG;
     }
 
+    @NonNull
     @Override
     public ResourceType getResourceType() {
         return RESOURCE_TYPE;
+    }
+
+    @StyleRes
+    @Override
+    public int getResourceId(@NonNull final String resourceName) {
+        return super.getResourceId(resourceName);
+    }
+
+    @StyleRes
+    @Override
+    public int getResourceId(@NonNull final String resourceName, final String family) {
+        return super.getResourceId(resourceName, family);
+    }
+
+    @StyleRes
+    @Override
+    public int optResourceId(@NonNull final String resourceName,
+                             @StyleRes final int fallbackResourceId) {
+        return super.optResourceId(resourceName, fallbackResourceId);
+    }
+
+    @StyleRes
+    @Override
+    public int optResourceId(@NonNull final String resourceName,
+                             @Nullable final String family,
+                             @StyleRes final int fallbackResourceId) {
+        return super.optResourceId(resourceName, family, fallbackResourceId);
     }
 }

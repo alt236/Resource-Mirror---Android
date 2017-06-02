@@ -16,6 +16,10 @@
 
 package uk.co.alt236.resourcemirror.reflectors;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.XmlRes;
+
 import uk.co.alt236.resourcemirror.ResourceType;
 import uk.co.alt236.resourcemirror.reflectors.base.AbstractResourceReflector;
 
@@ -27,13 +31,42 @@ public final class XmlReflector extends AbstractResourceReflector {
         super(packageName);
     }
 
+    @NonNull
     @Override
     protected String getLogTag() {
         return TAG;
     }
 
+    @NonNull
     @Override
     public ResourceType getResourceType() {
         return RESOURCE_TYPE;
+    }
+
+    @XmlRes
+    @Override
+    public int getResourceId(@NonNull final String resourceName) {
+        return super.getResourceId(resourceName);
+    }
+
+    @XmlRes
+    @Override
+    public int getResourceId(@NonNull final String resourceName, final String family) {
+        return super.getResourceId(resourceName, family);
+    }
+
+    @XmlRes
+    @Override
+    public int optResourceId(@NonNull final String resourceName,
+                             @XmlRes final int fallbackResourceId) {
+        return super.optResourceId(resourceName, fallbackResourceId);
+    }
+
+    @XmlRes
+    @Override
+    public int optResourceId(@NonNull final String resourceName,
+                             @Nullable final String family,
+                             @XmlRes final int fallbackResourceId) {
+        return super.optResourceId(resourceName, family, fallbackResourceId);
     }
 }

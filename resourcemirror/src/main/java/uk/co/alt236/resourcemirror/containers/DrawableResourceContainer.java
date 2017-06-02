@@ -18,6 +18,7 @@ package uk.co.alt236.resourcemirror.containers;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.PorterDuff.Mode;
+import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
 public class DrawableResourceContainer {
@@ -26,11 +27,14 @@ public class DrawableResourceContainer {
     private final String mDrawableName;
     private ColorFilter mColourFilter;
 
-    public DrawableResourceContainer(final int resourceId, final Integer colourFilterColour) {
+    public DrawableResourceContainer(final int resourceId,
+                                     final Integer colourFilterColour) {
         this(null, resourceId, colourFilterColour);
     }
 
-    public DrawableResourceContainer(final String drawableName, final int resourceId, final Integer colourFilterColour) {
+    public DrawableResourceContainer(final String drawableName,
+                                     @DrawableRes final int resourceId,
+                                     final Integer colourFilterColour) {
         this.mResourceId = resourceId;
         this.mColourFilterColour = colourFilterColour;
         this.mDrawableName = drawableName;
@@ -60,6 +64,7 @@ public class DrawableResourceContainer {
         return mColourFilter;
     }
 
+    @DrawableRes
     public int getResourceId() {
         return mResourceId;
     }

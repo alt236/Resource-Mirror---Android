@@ -17,6 +17,10 @@
 package uk.co.alt236.resourcemirror.reflectors;
 
 
+import android.support.annotation.BoolRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import uk.co.alt236.resourcemirror.ResourceType;
 import uk.co.alt236.resourcemirror.reflectors.base.AbstractResourceReflector;
 
@@ -28,13 +32,42 @@ public final class BooleanReflector extends AbstractResourceReflector {
         super(packageName);
     }
 
+    @NonNull
     @Override
     protected String getLogTag() {
         return TAG;
     }
 
+    @NonNull
     @Override
     public ResourceType getResourceType() {
         return RESOURCE_TYPE;
+    }
+
+    @BoolRes
+    @Override
+    public int getResourceId(@NonNull final String resourceName) {
+        return super.getResourceId(resourceName);
+    }
+
+    @BoolRes
+    @Override
+    public int getResourceId(@NonNull final String resourceName, final String family) {
+        return super.getResourceId(resourceName, family);
+    }
+
+    @BoolRes
+    @Override
+    public int optResourceId(@NonNull final String resourceName,
+                             @BoolRes final int fallbackResourceId) {
+        return super.optResourceId(resourceName, fallbackResourceId);
+    }
+
+    @BoolRes
+    @Override
+    public int optResourceId(@NonNull final String resourceName,
+                             @Nullable final String family,
+                             @BoolRes final int fallbackResourceId) {
+        return super.optResourceId(resourceName, family, fallbackResourceId);
     }
 }
