@@ -16,10 +16,13 @@
 
 package uk.co.alt236.resourcemirror.reflectors.base;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 public class ResourceKeyFormatter {
-    public String formatKey(final String name, final String family) {
+    public String formatKey(@NonNull final String name,
+                            @Nullable final String family) {
         if (TextUtils.isEmpty(family)) {
             return name;
         } else {
@@ -27,7 +30,9 @@ public class ResourceKeyFormatter {
         }
     }
 
-    public String formatKey(final String prefix, final String name, final String family) {
+    public String formatKey(@Nullable final String prefix,
+                            @NonNull final String name,
+                            @Nullable final String family) {
         if (TextUtils.isEmpty(prefix)) {
             return formatKey(name, family);
         } else {

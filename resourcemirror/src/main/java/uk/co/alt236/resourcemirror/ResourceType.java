@@ -16,6 +16,9 @@
 
 package uk.co.alt236.resourcemirror;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 public enum ResourceType {
     ANIM("anim"),
     ANIMATOR("animator"),
@@ -41,14 +44,16 @@ public enum ResourceType {
 
     private final String mResourceName;
 
-    private ResourceType(final String name) {
+    ResourceType(final String name) {
         mResourceName = name;
     }
 
+    @NonNull
     public String getResourceName() {
         return mResourceName;
     }
 
+    @Nullable
     public static ResourceType fromString(final String string) {
         for (final ResourceType type : ResourceType.values()) {
             if (type.getResourceName().equals(string)) {

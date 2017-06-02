@@ -16,6 +16,7 @@
 
 package uk.co.alt236.resourcemirror.reflectors.base;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.lang.reflect.Field;
@@ -62,6 +63,7 @@ import uk.co.alt236.resourcemirror.ResourceType;
         }
     }
 
+    @NonNull
     public List<String> getResourceList(final ResourceType type) {
         final List<String> list = new ArrayList<>();
         final Class<?> resourceClass = getResourceClass(getResourceLocation(type));
@@ -84,6 +86,7 @@ import uk.co.alt236.resourcemirror.ResourceType;
         return Collections.unmodifiableList(list);
     }
 
+    @NonNull
     public List<String> getResourceTypes() {
         final String baseClass = mPackageName + ".R";
         final List<String> list = new ArrayList<>();
@@ -121,7 +124,10 @@ import uk.co.alt236.resourcemirror.ResourceType;
         }
     }
 
-    public int reflectResource(final ResourceType type, final String fieldName, final int defaultValue, final boolean reportFailure) {
+    public int reflectResource(final ResourceType type,
+                               final String fieldName,
+                               final int defaultValue,
+                               final boolean reportFailure) {
         final String resourceLocation = getResourceLocation(type);
 
         final int error;

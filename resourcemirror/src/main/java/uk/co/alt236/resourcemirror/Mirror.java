@@ -17,6 +17,7 @@
 package uk.co.alt236.resourcemirror;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +54,7 @@ public class Mirror {
     private final ReflectorFactory mReflectorFactory;
     private final String mPackageName;
 
-    private Mirror(final String packageName) {
+    private Mirror(@NonNull final String packageName) {
         mPackageName = packageName;
         mReflectorFactory = new ReflectorFactory(mPackageName);
     }
@@ -65,76 +66,118 @@ public class Mirror {
      * @return the {@link uk.co.alt236.resourcemirror.reflectors.base.ResourceReflector} requested
      * @throws java.lang.IllegalArgumentException if an unknown or null {@link ResourceType} is requested.
      */
-    public ResourceReflector get(final ResourceType resource) {
+    public ResourceReflector get(@NonNull final ResourceType resource) {
         return mReflectorFactory.get(resource);
     }
 
+    @NonNull
     public AnimationReflector getAnimations() {
         return mReflectorFactory.getAnimations();
     }
 
+    @NonNull
     public AnimatorReflector getAnimators() {
         return mReflectorFactory.getAnimators();
     }
 
+    @NonNull
     public ArrayLoaderReflector getArrays() {
         return mReflectorFactory.getArrays();
     }
 
+    @NonNull
     public AttrReflector getAttrs() {
         return mReflectorFactory.getAttrs();
     }
 
+    @NonNull
     public BooleanReflector getBooleans() {
         return mReflectorFactory.getBooleans();
     }
 
+    @NonNull
     public ColorReflector getColors() {
         return mReflectorFactory.getColors();
     }
 
+    @NonNull
     public DimenReflector getDimens() {
         return mReflectorFactory.getDimens();
     }
 
+    @NonNull
     public DrawableReflector getDrawables() {
         return mReflectorFactory.getDrawables();
     }
 
+    @NonNull
     public FractionReflector getFractions() {
         return mReflectorFactory.getFractions();
     }
 
+    @NonNull
     public IdReflector getIds() {
         return mReflectorFactory.getIds();
     }
 
+    @NonNull
     public IntegerReflector getIntegers() {
         return mReflectorFactory.getIntegers();
     }
 
+    @NonNull
     public InterpolatorReflector getInterpolators() {
         return mReflectorFactory.getInterpolators();
     }
 
+    @NonNull
     public LayoutReflector getLayouts() {
         return mReflectorFactory.getLayouts();
     }
 
+    @NonNull
     public MenuReflector getMenus() {
         return mReflectorFactory.getMenus();
     }
 
+    @NonNull
     public MipMapReflector getMipMaps() {
         return mReflectorFactory.getMipMaps();
     }
 
+    @NonNull
     public PluralsReflector getPlurals() {
         return mReflectorFactory.getPlurals();
     }
 
+    @NonNull
     public RawReflector getRaws() {
         return mReflectorFactory.getRaws();
+    }
+
+    @NonNull
+    public StringReflector getStrings() {
+        return mReflectorFactory.getStrings();
+    }
+
+    @NonNull
+    public StyleableReflector getStyleables() {
+        return mReflectorFactory.getStyleables();
+    }
+
+    @NonNull
+    public StyleReflector getStyles() {
+        return mReflectorFactory.getStyles();
+    }
+
+    @NonNull
+    public XmlReflector getXmls() {
+        return mReflectorFactory.getXmls();
+    }
+
+    @NonNull
+    public String getPackageName() {
+        return mPackageName;
     }
 
     /**
@@ -142,28 +185,9 @@ public class Mirror {
      *
      * @return the list of Resource types.
      */
+    @NonNull
     public List<String> getResourceTypes() {
         return getDrawables().getAllResourceTypes();
-    }
-
-    public StringReflector getStrings() {
-        return mReflectorFactory.getStrings();
-    }
-
-    public StyleableReflector getStyleables() {
-        return mReflectorFactory.getStyleables();
-    }
-
-    public StyleReflector getStyles() {
-        return mReflectorFactory.getStyles();
-    }
-
-    public XmlReflector getXmls() {
-        return mReflectorFactory.getXmls();
-    }
-
-    public String getPackageName() {
-        return mPackageName;
     }
 
     public static void clear() {
@@ -184,7 +208,8 @@ public class Mirror {
      * @param context A standard Android context. It cannot be null.
      * @return The instance of the {@link Mirror}
      */
-    public static Mirror of(final Context context) {
+    @NonNull
+    public static Mirror of(@NonNull final Context context) {
         return of(getPackageName(context));
     }
 
@@ -194,7 +219,8 @@ public class Mirror {
      * @param packageName The package name to try and reflect off.
      * @return The instance of the {@link Mirror}
      */
-    public static Mirror of(final String packageName) {
+    @NonNull
+    public static Mirror of(@NonNull final String packageName) {
         synchronized (MAP_LOCK) {
             if (!MAP_OF_MIRRORS.containsKey(packageName)) {
                 MAP_OF_MIRRORS.put(packageName, new Mirror(packageName));
@@ -211,7 +237,7 @@ public class Mirror {
      * @param context A standard Android context. It cannot be null.
      * @return The package name.
      */
-    public static String getPackageName(final Context context) {
+    public static String getPackageName(@NonNull final Context context) {
         return context.getApplicationContext().getPackageName();
     }
 }
