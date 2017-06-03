@@ -39,6 +39,7 @@ dependencies {
 }
 
 android {
+    print "$name"
     compileSdkVersion rootProject.androidCompileSdkVersion
     buildToolsVersion rootProject.androidBuildToolsVersion
 
@@ -63,6 +64,7 @@ publishing {
 
             artifact sourcesJar
             artifact javadocJar
+            artifact("$buildDir/outputs/aar/$project.name-release.aar")
 
             pom.withXml {
                 // Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
