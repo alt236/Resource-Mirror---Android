@@ -15,11 +15,27 @@
  */
 
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
 
-ext {
-    PUBLISH_GROUP_ID = 'uk.co.alt236'
-    PUBLISH_ARTIFACT_ID = 'resource-mirror-android'
-    PUBLISH_VERSION = '0.0.1'
+final int versionMajor = 1
+final int versionMinor = 0
+final int versionPatch = 0
+
+final String gitHubRepo = 'alt236/Resource-Mirror---Android'
+final String artifactName = 'resource-mirror-android'
+final String artifactDesc = 'Get Android resource IDs reflectively by name'
+final String[] tags = ['android', 'resources', 'reflection']
+
+final String artifactGroupId = 'uk.co.alt236'
+final String semanticVersion = "${versionMajor}.${versionMinor}.${versionPatch}"
+final String gitHubUrl = "https://github.com/${gitHubRepo}"
+
+final String bintrayUser = project.hasProperty('alt236JCenterUser') ? alt236JCenterUser : "<NO USER NAME>"
+final String bintrayToken = project.hasProperty('alt236JCenterToken') ? alt236JCenterToken : "<NO TOKEN>"
+
+dependencies {
+    provided "com.android.support:support-annotations:${appCompatLibVersion}"
 }
 
 android {
@@ -38,8 +54,78 @@ android {
     }
 }
 
-dependencies {
-    provided "com.android.support:support-annotations:${appCompatLibVersion}"
+publishing {
+    publications {
+        androidPublication(MavenPublication) {
+            groupId artifactGroupId
+            artifactId artifactName
+            version semanticVersion
+
+            artifact sourcesJar
+            artifact javadocJar
+
+            pom.withXml {
+                // Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.compile.allDependencies.each {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                }
+            }
+        }
+
+    }
 }
 
-//apply from: 'android-release-aar.gradle'
+bintray {
+    user = bintrayUser
+    key = bintrayToken
+
+    dryRun = false
+    publish = false
+    publications = ['androidPublication']
+    pkg {
+        repo = 'maven'
+        userOrg = bintrayUser
+        name = artifactName
+        desc = artifactDesc
+        websiteUrl = "${gitHubUrl}"
+        issueTrackerUrl = "${gitHubUrl}/issues"
+        vcsUrl = "${gitHubUrl}.git"
+        labels = tags
+        licenses = ['Apache-2.0']
+        publicDownloadNumbers = true
+        githubRepo = "${gitHubRepo}"
+        githubReleaseNotesFile = 'README.md'
+
+        version {
+            name = semanticVersion
+            //desc = 'optional, version-specific description'
+            mavenCentralSync {
+                sync = false
+                // Optional (true by default). Determines whether to sync the version to Maven Central.
+                user = 'userToken' //OSS user token
+                password = 'paasword' //OSS user password
+                close = '1'
+                // Optional property. By default the staging repository is closed and artifacts are released to Maven Central.
+                // You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
+            }
+        }
+    }
+
+    task sourcesJar(type: Jar) {
+        from android.sourceSets.main.java.srcDirs
+        classifier = 'sources'
+    }
+
+    task javadoc(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+}
