@@ -16,47 +16,43 @@
 
 package uk.co.alt236.resourcemirror.reflectors.base;
 
+import android.content.Context;
 import android.content.res.Resources;
-import android.test.AndroidTestCase;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import uk.co.alt236.resourcemirror.Mirror;
 import uk.co.alt236.resourcemirror.ResourceType;
 
-public class ResourceReflectorTest extends AndroidTestCase {
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotNull;
+
+@RunWith(AndroidJUnit4.class)
+public class ResourceReflectorTest {
     private static final String NON_EXISTING_RESOURCE = "!THIS_CANNOT_BE!";
     private static final String NON_EXISTING_FAMILY = "!THIS_CANNOT_BE!";
 
     private static final int FALLBACK_RES = 255;
 
-    @Override
+    @Before
     public void setUp(){
         Mirror.clear();
     }
 
+    @Test(expected = Resources.NotFoundException.class)
     public void testGetResourceId() throws Exception {
         assertEquals(0, Mirror.getNumberOfMirrors());
-
-        for(final ResourceType type : ResourceType.values()){
-            try {
-                Mirror.of(getContext()).get(type).getResourceId(NON_EXISTING_RESOURCE);
-                fail("Should have thrown an exception...");
-            } catch(final Resources.NotFoundException e){
-                // expected;
-            }
-        }
+        Mirror.of(getContext()).getDimens().getResourceId(NON_EXISTING_RESOURCE);
     }
 
     public void testGetResourceId1() throws Exception {
         assertEquals(0, Mirror.getNumberOfMirrors());
-
-        for(final ResourceType type : ResourceType.values()){
-            try {
-                Mirror.of(getContext()).get(type).getResourceId(NON_EXISTING_RESOURCE, NON_EXISTING_FAMILY);
-                fail("Should have thrown an exception...");
-            } catch(final Resources.NotFoundException e){
-                // expected;
-            }
-        }
+        assertEquals(0, Mirror.getNumberOfMirrors());
+        Mirror.of(getContext()).getDimens().getResourceId(NON_EXISTING_RESOURCE, NON_EXISTING_FAMILY);
     }
 
     public void testGetResourceType() throws Exception {
@@ -82,5 +78,9 @@ public class ResourceReflectorTest extends AndroidTestCase {
         for(final ResourceType type : ResourceType.values()){
             assertEquals(FALLBACK_RES, Mirror.of(getContext()).get(type).optResourceId(NON_EXISTING_RESOURCE, NON_EXISTING_FAMILY, FALLBACK_RES));
         }
+    }
+
+    private Context getContext() {
+        return InstrumentationRegistry.getTargetContext();
     }
 }

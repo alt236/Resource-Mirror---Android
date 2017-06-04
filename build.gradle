@@ -24,6 +24,8 @@ ext.androidBuildToolsVersion = '25.0.2'
 
 // Dependency Versions
 ext.appCompatLibVersion = "25.3.1"
+ext.junitVersion = "4.12"
+ext.mockitoVersion = "1.10.19"
 
 buildscript {
     repositories {
