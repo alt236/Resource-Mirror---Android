@@ -16,222 +16,65 @@
 
 package uk.co.alt236.resourcemirror.reflectors;
 
-import android.test.AndroidTestCase;
+
+import android.app.Application;
+import android.content.Context;
+import android.support.test.runner.AndroidJUnit4;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 
 import uk.co.alt236.resourcemirror.Mirror;
 import uk.co.alt236.resourcemirror.ResourceType;
-import uk.co.alt236.resourcemirror.reflectors.base.ResourceReflector;
 
-public class MirrorTest extends AndroidTestCase {
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotNull;
 
-    @Override
+@RunWith(AndroidJUnit4.class)
+public class MirrorTest {
+    private static final String PACKAGE_NAME = "fake_package_name";
+
+    private Context mockContext;
+
+    @Before
     public void setUp(){
         Mirror.clear();
+        mockContext = Mockito.mock(Context.class);
+        final Application mockApp = Mockito.mock(Application.class);
+        Mockito.when(mockContext.getPackageName()).thenReturn(PACKAGE_NAME);
+        Mockito.when(mockApp.getPackageName()).thenReturn(PACKAGE_NAME);
+        Mockito.when(mockContext.getApplicationContext()).thenReturn(mockApp);
     }
 
+    @Test
     public void testGet() throws Exception {
         assertEquals(0, Mirror.getNumberOfMirrors());
 
         for(final ResourceType type : ResourceType.values()){
-            assertNotNull(Mirror.of(getContext()).get(type));
-            assertEquals(type, Mirror.of(getContext()).get(type).getResourceType());
-        }
-
-
-        try{
-            Mirror.of(getContext()).get(null);
-            fail("Should have thrown an exception...");
-        } catch(final IllegalArgumentException e){
-            // Expected
+            assertNotNull(Mirror.of(mockContext).get(type));
+            assertEquals(type, Mirror.of(mockContext).get(type).getResourceType());
         }
     }
 
-    public void testGetAnimations() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.ANIM;
-        final ResourceReflector reflector = Mirror.of(getContext()).getAnimations();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetNull() {
+        Mirror.of(mockContext).get(null);
     }
 
-    public void testGetAnimators() throws Exception {
+    @Test
+    public void testGetPackageNameAfterSetup() {
         assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.ANIMATOR;
-        final ResourceReflector reflector = Mirror.of(getContext()).getAnimators();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
+        Mirror.of(mockContext).getAnimations();
+        assertEquals(1, Mirror.getNumberOfMirrors());
+        assertEquals(PACKAGE_NAME, Mirror.of(mockContext).getPackageName());
     }
 
-    public void testGetArrays() throws Exception {
+    @Test
+    public void testGetPackageNameUtil() {
         assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.ARRAY;
-        final ResourceReflector reflector = Mirror.of(getContext()).getArrays();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetAttrs() throws Exception {
+        assertEquals(PACKAGE_NAME, Mirror.getPackageName(mockContext));
         assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.ATTR;
-        final ResourceReflector reflector = Mirror.of(getContext()).getAttrs();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetBooleans() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.BOOL;
-        final ResourceReflector reflector = Mirror.of(getContext()).getBooleans();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetColors() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.COLOR;
-        final ResourceReflector reflector = Mirror.of(getContext()).getColors();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetDimens() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.DIMEN;
-        final ResourceReflector reflector = Mirror.of(getContext()).getDimens();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetDrawables() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.DRAWABLE;
-        final ResourceReflector reflector = Mirror.of(getContext()).getDrawables();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetFractions() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.FRACTION;
-        final ResourceReflector reflector = Mirror.of(getContext()).getFractions();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetIds() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.ID;
-        final ResourceReflector reflector = Mirror.of(getContext()).getIds();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetIntegers() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.INTEGER;
-        final ResourceReflector reflector = Mirror.of(getContext()).getIntegers();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetInterpolators() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.INTERPOLATOR;
-        final ResourceReflector reflector = Mirror.of(getContext()).getInterpolators();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetLayouts() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.LAYOUT;
-        final ResourceReflector reflector = Mirror.of(getContext()).getLayouts();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetMenus() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.MENU;
-        final ResourceReflector reflector = Mirror.of(getContext()).getMenus();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetMipMaps() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.MIPMAP;
-        final ResourceReflector reflector = Mirror.of(getContext()).getMipMaps();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetPlurals() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.PLURALS;
-        final ResourceReflector reflector = Mirror.of(getContext()).getPlurals();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetRaws() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.RAW;
-        final ResourceReflector reflector = Mirror.of(getContext()).getRaws();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetStrings() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.STRING;
-        final ResourceReflector reflector = Mirror.of(getContext()).getStrings();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetStyleables() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.STYLEABLE;
-        final ResourceReflector reflector = Mirror.of(getContext()).getStyleables();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetStyles() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.STYLE;
-        final ResourceReflector reflector = Mirror.of(getContext()).getStyles();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
-    }
-
-    public void testGetXmls() throws Exception {
-        assertEquals(0, Mirror.getNumberOfMirrors());
-        final ResourceType type = ResourceType.XML;
-        final ResourceReflector reflector = Mirror.of(getContext()).getXmls();
-        assertNotNull(reflector);
-        assertEquals(type, reflector.getResourceType());
-        assertEquals(reflector, Mirror.of(getContext()).get(type));
     }
 }

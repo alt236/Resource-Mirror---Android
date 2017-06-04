@@ -35,7 +35,15 @@ final String bintrayUser = project.hasProperty('alt236JCenterUser') ? alt236JCen
 final String bintrayToken = project.hasProperty('alt236JCenterToken') ? alt236JCenterToken : "<NO TOKEN>"
 
 dependencies {
+    androidTestCompile 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
+    androidTestCompile "org.mockito:mockito-core:${mockitoVersion}"
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
     provided "com.android.support:support-annotations:${appCompatLibVersion}"
+    testCompile "junit:junit:${junitVersion}"
+    testCompile "org.mockito:mockito-core:${mockitoVersion}"
 }
 
 android {
@@ -46,6 +54,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.androidMinSdkVersion
         targetSdkVersion rootProject.androidTargetSdkVersion
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
