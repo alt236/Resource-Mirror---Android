@@ -32,9 +32,11 @@ Usage
 <b>Quick and easy</b>
 
 The most common use case would be to call on of the following:
-
-`Mirror.of(Context).getXXX().getResourceId("resourceName");` or
-`Mirror.of(Context).getXXX().optResourceId("resourceName", R.xxx.fallbackResource);`
+```java
+Mirror.of(Context).getXXX().getResourceId("resourceName");
+or
+Mirror.of(Context).getXXX().optResourceId("resourceName", R.xxx.fallbackResource);
+```
 
 where `XXX` is the reource type (String, Drawable, Layout, etc.)
 The difference between the two calls are as follows:
@@ -106,8 +108,8 @@ Feel free to expand the `DrawableResourceContainer` to add other colour filters 
 
 ProGuard
 --------
-
-ProGuard users must ensure that the R class, its inner R class and all fields are not obfuscated for the runtime reflection to work. Add the following to your your `proguard-project.txt` file:
+Proguard normally strips code that appears unused, and that includes fields under `R.class` that are only accessed reflectively.
+As a result, users must ensure that the R class, its inner R class and all fields are not obfuscated for the runtime reflection to work. Add the following to your your `proguard-project.txt` file:
 
 ```
     -keepattributes InnerClasses
@@ -142,4 +144,4 @@ The icons used for the example app were downloaded from here: [Android Design](h
 
 The code in this project is licensed under the Apache Software License 2.0.
 
-Copyright (c) 2015 Alexandros Schillings.
+Copyright (c) 2017 Alexandros Schillings.
