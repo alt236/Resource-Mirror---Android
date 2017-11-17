@@ -18,12 +18,12 @@
 
 // Build
 ext.androidMinSdkVersion = 15
-ext.androidCompileSdkVersion = 25
-ext.androidTargetSdkVersion = 25
-ext.androidBuildToolsVersion = '25.0.2'
+ext.androidCompileSdkVersion = 26
+ext.androidTargetSdkVersion = 26
+ext.androidBuildToolsVersion = '26.0.2'
 
 // Dependency Versions
-ext.appCompatLibVersion = "25.3.1"
+ext.appCompatLibVersion = "26.0.1"
 ext.junitVersion = "4.12"
 ext.mockitoVersion = "1.10.19"
 
@@ -32,15 +32,16 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:2.3.3'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
     }
 }
