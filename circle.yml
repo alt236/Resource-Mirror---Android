@@ -12,19 +12,11 @@ dependencies:
 test:
   override:
     - (echo "Running JUnit tests!")
-    - ./gradlew test -PdisablePreDex
-    - emulator -avd circleci-android22 -no-audio -no-window:
-         background: true
-         parallel: true
-    # wait for it to have booted
-    - circle-android wait-for-boot
-    - sleep 30
-    - adb shell input keyevent 82
-    # run tests  against the emulator.
-    - (echo "Running Instrumentation tests!")
-    - ADB_INSTALL_TIMEOUT=8 ./gradlew connectedAndroidTest -PdisablePreDex
+    - ./gradlew test -PdisablePreDex --no-daemon
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     - mkdir -p $CIRCLE_TEST_REPORTS/androidTests/
     - find . -type f -regex ".*/build/outputs/androidTest-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/androidTests/ \;
+    - mkdir -p $CIRCLE_TEST_REPORTS/reports/
+    - find . -type f -regex ".*/build/reports/.*" -exec cp --parents {} $CIRCLE_TEST_REPORTS/reports/ \;

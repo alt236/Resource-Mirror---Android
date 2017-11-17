@@ -44,6 +44,7 @@ dependencies {
     provided "com.android.support:support-annotations:${appCompatLibVersion}"
     testCompile "junit:junit:${junitVersion}"
     testCompile "org.mockito:mockito-core:${mockitoVersion}"
+    testCompile "org.robolectric:robolectric:3.3.2"
 }
 
 android {

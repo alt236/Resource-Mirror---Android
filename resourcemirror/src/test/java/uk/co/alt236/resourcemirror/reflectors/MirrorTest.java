@@ -19,21 +19,19 @@ package uk.co.alt236.resourcemirror.reflectors;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
 import uk.co.alt236.resourcemirror.Mirror;
 import uk.co.alt236.resourcemirror.ResourceType;
+import uk.co.alt236.resourcemirror.testing.BaseRobolectricTest;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
-@RunWith(AndroidJUnit4.class)
-public class MirrorTest {
+public class MirrorTest extends BaseRobolectricTest {
     private static final String PACKAGE_NAME = "fake_package_name";
 
     private Context mockContext;

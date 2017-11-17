@@ -16,25 +16,33 @@
 
 package uk.co.alt236.resourcemirror.reflectors.base;
 
-import junit.framework.TestCase;
 
-public class ResourceKeyFormatterTest extends TestCase {
+import org.junit.Before;
+import org.junit.Test;
+
+import uk.co.alt236.resourcemirror.testing.BaseRobolectricTest;
+
+import static org.junit.Assert.assertEquals;
+
+public class ResourceKeyFormatterTest extends BaseRobolectricTest {
     private static final String KEY = "submarine";
     private static final String FAMILY = "family";
     private static final String PREFIX = "ic_";
 
     private ResourceKeyFormatter mFormatter;
 
-    @Override
+    @Before
     public void setUp(){
         this.mFormatter = new ResourceKeyFormatter();
     }
 
+    @Test
     public void testFormatKey1() throws Exception {
         assertEquals(KEY, mFormatter.formatKey(KEY, null));
         assertEquals(FAMILY + "_" + KEY, mFormatter.formatKey(KEY, FAMILY));
     }
 
+    @Test
     public void testFormatKey() throws Exception {
         assertEquals(KEY, mFormatter.formatKey(null, KEY, null));
         assertEquals(FAMILY + "_" + KEY, mFormatter.formatKey(null, KEY, FAMILY));

@@ -16,23 +16,19 @@
 
 package uk.co.alt236.resourcemirror.reflectors.base;
 
-import android.content.Context;
 import android.content.res.Resources;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import uk.co.alt236.resourcemirror.Mirror;
 import uk.co.alt236.resourcemirror.ResourceType;
+import uk.co.alt236.resourcemirror.testing.BaseRobolectricTest;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
-@RunWith(AndroidJUnit4.class)
-public class ResourceReflectorTest {
+public class ResourceReflectorTest extends BaseRobolectricTest {
     private static final String NON_EXISTING_RESOURCE = "!THIS_CANNOT_BE!";
     private static final String NON_EXISTING_FAMILY = "!THIS_CANNOT_BE!";
 
@@ -78,9 +74,5 @@ public class ResourceReflectorTest {
         for(final ResourceType type : ResourceType.values()){
             assertEquals(FALLBACK_RES, Mirror.of(getContext()).get(type).optResourceId(NON_EXISTING_RESOURCE, NON_EXISTING_FAMILY, FALLBACK_RES));
         }
-    }
-
-    private Context getContext() {
-        return InstrumentationRegistry.getTargetContext();
     }
 }
